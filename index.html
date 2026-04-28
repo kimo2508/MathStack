@@ -4,179 +4,466 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>MathStack</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f5f7ff;
+  --bg: #fef9f3;
+  --bg-2: #fff5e8;
   --card: #ffffff;
-  --border: #e2e8f0;
-  --shadow: 0 4px 20px rgba(80,100,200,0.10);
-  --shadow-lg: 0 8px 40px rgba(80,100,200,0.16);
-  --blue: #4f6ef7;
-  --blue-dark: #3a56d4;
-  --blue-light: #eef1fe;
-  --green: #22c55e;
-  --green-light: #dcfce7;
+  --border: #e8dfd0;
+  --shadow: 0 4px 20px rgba(120,80,40,0.08);
+  --shadow-lg: 0 12px 40px rgba(120,80,40,0.14);
+
+  --kailea: #ff6b9d;
+  --kailea-2: #c084fc;
+  --kailea-bg: #fff0f7;
+  --kaleb: #14b8a6;
+  --kaleb-2: #1e3a8a;
+  --kaleb-bg: #ecfeff;
+
+  --accent: #f59e0b;
+  --green: #10b981;
+  --green-bg: #d1fae5;
   --red: #ef4444;
-  --red-light: #fee2e2;
+  --red-bg: #fee2e2;
   --orange: #f97316;
-  --orange-light: #fff0e6;
-  --yellow: #f59e0b;
-  --yellow-light: #fef3c7;
-  --text: #1a1f35;
-  --muted: #64748b;
-  --radius: 20px;
-  --radius-sm: 12px;
+  --orange-bg: #ffedd5;
+  --yellow: #fbbf24;
+  --yellow-bg: #fef3c7;
+
+  --text: #1c1917;
+  --muted: #78716c;
+  --radius: 24px;
+  --radius-sm: 14px;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body { background: var(--bg); font-family: 'Nunito Sans', sans-serif; color: var(--text); min-height: 100vh; }
-.screen { display: none; min-height: 100vh; padding: 1.5rem; flex-direction: column; }
+body { background: var(--bg); font-family: var(--font-body); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+button { font-family: inherit; }
+
+.screen { display: none; min-height: 100vh; padding: 1.5rem; flex-direction: column; max-width: 480px; margin: 0 auto; }
 .screen.active { display: flex; }
 
-/* HOME */
+/* === HOME === */
 #home {
-  background: linear-gradient(155deg, #2d3a8c 0%, #4f6ef7 55%, #7c3aed 100%);
-  color: white; align-items: center; justify-content: center;
-  gap: 2.5rem; padding: 2.5rem 1.5rem;
+  background: linear-gradient(165deg, #fff5e8 0%, #ffe8d4 60%, #ffd4b8 100%);
+  align-items: stretch; gap: 1.75rem; justify-content: center; padding: 2.5rem 1.5rem;
 }
-.app-brand { text-align: center; }
-.app-brand .logo-icon { font-size: 3.5rem; display: block; margin-bottom: 0.4rem; }
-.app-brand h1 { font-family: 'Nunito', sans-serif; font-size: 3rem; font-weight: 900; letter-spacing: -2px; line-height: 1; }
-.app-brand .tagline { font-size: 0.9rem; opacity: 0.7; margin-top: 0.4rem; }
-.who-label { font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6; text-align: center; margin-bottom: 0.75rem; }
-.student-list { display: flex; flex-direction: column; gap: 0.9rem; width: 100%; max-width: 360px; }
-.s-card { background: rgba(255,255,255,0.13); border: 1.5px solid rgba(255,255,255,0.22); border-radius: var(--radius); padding: 1rem 1.2rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; transition: all 0.18s; backdrop-filter: blur(12px); }
-.s-card:active { transform: scale(0.97); background: rgba(255,255,255,0.22); }
-.s-card .av { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; background: rgba(255,255,255,0.15); }
-.s-card .si { flex: 1; }
-.s-card .si .sname { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.1rem; }
-.s-card .si .sgrade { font-size: 0.78rem; opacity: 0.7; margin-top: 0.1rem; }
-.s-card .sstreak { text-align: right; }
-.s-card .sstreak strong { font-family: 'Nunito', sans-serif; font-size: 1.3rem; font-weight: 900; display: block; }
-.s-card .sstreak span { font-size: 0.7rem; opacity: 0.65; }
-.home-note { font-size: 0.75rem; opacity: 0.6; text-align: center; max-width: 300px; line-height: 1.5; }
+.brand-mark { text-align: center; padding-top: 1rem; }
+.brand-mark .logo {
+  font-family: var(--font-display); font-weight: 900; font-size: 3.5rem;
+  letter-spacing: -3px; line-height: 0.9; color: var(--text);
+  background: linear-gradient(135deg, #1c1917 0%, #292524 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.brand-mark .logo .stack { font-style: italic; color: var(--accent); -webkit-text-fill-color: var(--accent); }
+.brand-mark .tag { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; letter-spacing: 0.02em; }
 
-/* SETUP */
-#setup { gap: 1.25rem; background: var(--bg); }
-.setup-top { text-align: center; padding: 0.5rem 0 0.25rem; }
-.setup-top h2 { font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: 900; }
-.setup-top p { color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem; }
-.field-card { background: var(--card); border-radius: var(--radius); padding: 1.1rem 1.2rem; box-shadow: var(--shadow); }
-.field-card label { display: block; font-weight: 700; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.5rem; }
-.field-card input { width: 100%; border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 0.8rem 1rem; font-size: 1rem; font-family: 'Nunito Sans', sans-serif; color: var(--text); background: var(--bg); outline: none; transition: border-color 0.2s; }
-.field-card input:focus { border-color: var(--blue); }
-.field-note { font-size: 0.72rem; color: var(--muted); margin-top: 0.45rem; line-height: 1.45; }
-.btn { display: block; width: 100%; border: none; border-radius: var(--radius); padding: 1rem; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; cursor: pointer; transition: all 0.18s; text-align: center; }
-.btn-primary { background: linear-gradient(135deg, var(--blue), #7c3aed); color: white; box-shadow: 0 4px 16px rgba(79,110,247,0.38); }
-.btn-primary:active { transform: scale(0.98); box-shadow: none; }
-.btn-ghost { background: transparent; color: var(--muted); font-size: 0.88rem; padding: 0.65rem; }
+.who-label {
+  font-family: var(--font-display); font-style: italic; font-weight: 700;
+  font-size: 0.95rem; color: var(--muted); text-align: center;
+  margin-bottom: 0.5rem;
+}
 
-/* DASHBOARD */
-#dashboard { background: var(--bg); gap: 0; }
-.dash-hero { background: linear-gradient(135deg, #2d3a8c 0%, #4f6ef7 60%, #7c3aed 100%); color: white; padding: 1.4rem 1.5rem 2.8rem; border-radius: 0 0 2rem 2rem; margin: -1.5rem -1.5rem 0; }
-.dh-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.1rem; }
-.dh-back { background: rgba(255,255,255,0.18); border: none; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; color: white; flex-shrink: 0; }
-.dh-name-wrap { flex: 1; }
-.dh-name { font-family: 'Nunito', sans-serif; font-size: 1.35rem; font-weight: 900; }
-.dh-sub { font-size: 0.78rem; opacity: 0.7; }
-.dash-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; }
-.dstat { background: rgba(255,255,255,0.14); border-radius: var(--radius-sm); padding: 0.55rem 0.4rem; text-align: center; backdrop-filter: blur(8px); }
-.dstat .dv { font-family: 'Nunito', sans-serif; font-size: 1.35rem; font-weight: 900; }
-.dstat .dl { font-size: 0.63rem; opacity: 0.72; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.1rem; }
-.dash-body { padding: 0.75rem 1.5rem 2rem; flex: 1; display: flex; flex-direction: column; gap: 1rem; margin-top: -1.3rem; }
-.sec-title { font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; }
-.skill-list { display: flex; flex-direction: column; gap: 0.5rem; }
-.sk-row { background: var(--card); border-radius: var(--radius-sm); padding: 0.85rem 1rem; display: flex; align-items: center; gap: 0.85rem; box-shadow: 0 2px 8px rgba(80,100,200,0.07); cursor: pointer; transition: all 0.18s; border: 2px solid transparent; }
-.sk-row:active:not(.sk-locked) { transform: scale(0.98); }
-.sk-row.sk-locked { opacity: 0.45; cursor: not-allowed; }
-.sk-row.sk-mastered { border-color: var(--green); }
-.sk-row.sk-current { border-color: var(--blue); background: var(--blue-light); }
-.sk-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
-.sk-mastered .sk-icon { background: var(--green-light); }
-.sk-current .sk-icon { background: white; }
-.sk-locked .sk-icon { background: #f1f5f9; }
-.sk-new .sk-icon { background: var(--yellow-light); }
-.sk-info { flex: 1; min-width: 0; }
-.sk-info .skn { font-weight: 700; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.sk-info .skd { font-size: 0.73rem; color: var(--muted); margin-top: 0.1rem; }
-.sk-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; flex-shrink: 0; }
-.sk-pct { font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 800; }
-.sk-mastered .sk-pct { color: var(--green); }
-.sk-current .sk-pct { color: var(--blue); }
-.sk-new .sk-pct { color: var(--yellow); }
-.sk-locked .sk-pct { color: var(--muted); }
-.mini-bar { width: 52px; height: 5px; background: var(--border); border-radius: 10px; overflow: hidden; }
-.mini-bar-fill { height: 100%; border-radius: 10px; background: var(--blue); transition: width 0.5s; }
-.sk-mastered .mini-bar-fill { background: var(--green); }
-.go-btn { width: 100%; border: none; background: linear-gradient(135deg, var(--blue), #7c3aed); color: white; border-radius: var(--radius); padding: 1.05rem; font-family: 'Nunito', sans-serif; font-size: 1.05rem; font-weight: 900; cursor: pointer; box-shadow: 0 4px 18px rgba(79,110,247,0.35); transition: all 0.18s; }
-.go-btn:active { transform: scale(0.98); box-shadow: none; }
+.kid-grid { display: grid; gap: 1rem; }
+.kid-card {
+  background: var(--card); border-radius: var(--radius); padding: 1.25rem;
+  display: flex; align-items: center; gap: 1rem; cursor: pointer;
+  transition: all 0.2s; box-shadow: var(--shadow); border: 2px solid transparent;
+  position: relative; overflow: hidden;
+}
+.kid-card:active { transform: scale(0.97); }
+.kid-card.kailea { border-color: var(--kailea); }
+.kid-card.kaleb { border-color: var(--kaleb); }
+.kid-card::before {
+  content: ''; position: absolute; right: -30px; top: -30px;
+  width: 120px; height: 120px; border-radius: 50%; opacity: 0.08;
+}
+.kid-card.kailea::before { background: var(--kailea); }
+.kid-card.kaleb::before { background: var(--kaleb); }
 
-/* PRACTICE */
-#practice { background: var(--bg); gap: 0.9rem; }
-.prac-header { display: flex; align-items: center; gap: 0.7rem; }
-.prac-back { background: var(--card); border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer; box-shadow: 0 2px 8px rgba(80,100,200,0.1); color: var(--text); flex-shrink: 0; }
-.prac-skill { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; }
-.prac-count { margin-left: auto; font-size: 0.8rem; color: var(--muted); font-weight: 700; white-space: nowrap; }
-.prog-wrap { background: var(--border); border-radius: 10px; height: 7px; overflow: hidden; }
-.prog-fill { height: 100%; background: linear-gradient(90deg, var(--blue), #7c3aed); border-radius: 10px; transition: width 0.4s ease; }
-.attempt-row { display: flex; gap: 0.35rem; align-items: center; }
-.attempt-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); transition: background 0.2s; }
-.attempt-dot.used { background: var(--red); }
-.attempt-dot.revealed-dot { background: var(--orange); }
-.attempt-label { font-size: 0.72rem; color: var(--muted); margin-left: 0.25rem; }
-.q-card { background: var(--card); border-radius: var(--radius); padding: 1.4rem 1.3rem; box-shadow: var(--shadow); position: relative; overflow: hidden; min-height: 120px; display: flex; flex-direction: column; justify-content: center; }
-.q-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), #7c3aed); }
-.q-tag { font-size: 0.68rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem; }
-.q-text { font-family: 'Nunito', sans-serif; font-size: 1.55rem; font-weight: 900; line-height: 1.35; color: var(--text); }
-.q-text.loading { color: var(--muted); font-size: 0.95rem; font-weight: 400; animation: pulse 1.4s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+.kid-mascot {
+  width: 64px; height: 64px; border-radius: 18px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.kid-mascot.kailea { background: linear-gradient(135deg, var(--kailea), var(--kailea-2)); }
+.kid-mascot.kaleb { background: linear-gradient(135deg, var(--kaleb), var(--kaleb-2)); }
+
+.kid-info { flex: 1; min-width: 0; z-index: 1; }
+.kid-info .name {
+  font-family: var(--font-display); font-weight: 900; font-size: 1.5rem;
+  letter-spacing: -0.5px; line-height: 1;
+}
+.kid-info .grade { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+
+.kid-stats { text-align: right; z-index: 1; }
+.kid-stats .streak {
+  font-family: var(--font-display); font-weight: 900; font-size: 1.5rem;
+  letter-spacing: -0.5px; line-height: 1;
+}
+.kid-stats .stat-l { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; font-weight: 700; }
+.kid-stats .coins { font-size: 0.78rem; color: var(--accent); margin-top: 0.4rem; font-weight: 700; }
+
+.home-foot { text-align: center; font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
+.home-foot a { color: var(--muted); text-decoration: underline; cursor: pointer; }
+
+/* === SETUP === */
+#setup { gap: 1.1rem; }
+.setup-head { text-align: center; padding: 0.5rem 0; }
+.setup-head h2 { font-family: var(--font-display); font-weight: 900; font-size: 1.75rem; letter-spacing: -1px; }
+.setup-head p { color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem; }
+
+.field {
+  background: var(--card); border-radius: var(--radius); padding: 1.1rem 1.2rem;
+  box-shadow: var(--shadow);
+}
+.field label {
+  display: block; font-weight: 700; font-size: 0.7rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;
+}
+.field input {
+  width: 100%; border: 2px solid var(--border); border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem; font-size: 1rem; font-family: var(--font-body);
+  color: var(--text); background: var(--bg-2); outline: none; transition: border-color 0.2s;
+}
+.field input:focus { border-color: var(--accent); background: white; }
+.field-note { font-size: 0.72rem; color: var(--muted); margin-top: 0.5rem; line-height: 1.45; }
+
+.btn {
+  display: block; width: 100%; border: none; border-radius: var(--radius);
+  padding: 1rem; font-family: var(--font-display); font-weight: 900; font-size: 1.05rem;
+  cursor: pointer; transition: all 0.18s; text-align: center; letter-spacing: -0.3px;
+}
+.btn-primary { background: var(--text); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.btn-primary:active { transform: scale(0.98); }
+.btn-ghost { background: transparent; color: var(--muted); font-size: 0.88rem; padding: 0.75rem; box-shadow: none; }
+
+/* === DASHBOARD === */
+#dashboard { padding: 0; gap: 0; }
+.dash-hero {
+  padding: 2rem 1.5rem 2.5rem; color: white;
+  border-radius: 0 0 32px 32px; position: relative; overflow: hidden;
+}
+.dash-hero.kailea { background: linear-gradient(155deg, var(--kailea) 0%, var(--kailea-2) 100%); }
+.dash-hero.kaleb { background: linear-gradient(155deg, var(--kaleb) 0%, var(--kaleb-2) 100%); }
+
+.dash-hero::before {
+  content: ''; position: absolute; right: -40px; top: -40px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+.dash-hero::after {
+  content: ''; position: absolute; left: -60px; bottom: -60px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+
+.dash-top { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+.icon-btn {
+  background: rgba(255,255,255,0.2); border: none; border-radius: 50%;
+  width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: white; flex-shrink: 0; font-size: 1.1rem; backdrop-filter: blur(10px);
+}
+.dash-name-block { flex: 1; }
+.dash-name { font-family: var(--font-display); font-weight: 900; font-size: 1.65rem; letter-spacing: -1px; line-height: 1; }
+.dash-name .em { font-style: italic; }
+.dash-greeting { font-size: 0.8rem; opacity: 0.85; margin-top: 0.3rem; }
+
+.dash-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; position: relative; z-index: 1; }
+.dstat {
+  background: rgba(255,255,255,0.18); border-radius: var(--radius-sm);
+  padding: 0.7rem 0.5rem; text-align: center; backdrop-filter: blur(10px);
+}
+.dstat .v { font-family: var(--font-display); font-weight: 900; font-size: 1.4rem; letter-spacing: -0.5px; }
+.dstat .l { font-size: 0.62rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.15rem; font-weight: 700; }
+
+.dash-body { padding: 1rem 1.5rem 2rem; flex: 1; display: flex; flex-direction: column; gap: 1.25rem; }
+
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.section-head h3 { font-family: var(--font-display); font-weight: 900; font-size: 1.15rem; letter-spacing: -0.5px; }
+.section-head .sub { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
+
+.skill-stack { display: flex; flex-direction: column; gap: 0.55rem; }
+.skill {
+  background: var(--card); border-radius: var(--radius-sm); padding: 0.95rem 1rem;
+  display: flex; align-items: center; gap: 0.85rem; box-shadow: 0 2px 8px rgba(120,80,40,0.06);
+  cursor: pointer; transition: all 0.18s; border: 2px solid transparent;
+}
+.skill:active:not(.locked) { transform: scale(0.98); }
+.skill.locked { opacity: 0.4; cursor: not-allowed; }
+.skill.mastered { border-color: var(--green); background: linear-gradient(to right, var(--green-bg), white); }
+.skill.current { border-color: var(--accent); background: linear-gradient(to right, var(--yellow-bg), white); }
+
+.skill-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.skill.mastered .skill-icon { background: var(--green); color: white; }
+.skill.current .skill-icon { background: var(--accent); color: white; }
+.skill.next .skill-icon { background: var(--bg-2); }
+.skill.locked .skill-icon { background: var(--bg-2); }
+
+.skill-info { flex: 1; min-width: 0; }
+.skill-info .n { font-family: var(--font-display); font-weight: 900; font-size: 1rem; letter-spacing: -0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.skill-info .d { font-size: 0.73rem; color: var(--muted); margin-top: 0.1rem; }
+
+.skill-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; flex-shrink: 0; }
+.skill-pct { font-family: var(--font-display); font-weight: 900; font-size: 0.85rem; }
+.skill.mastered .skill-pct { color: var(--green); }
+.skill.current .skill-pct { color: var(--accent); }
+.skill.locked .skill-pct { color: var(--muted); }
+.skill.next .skill-pct { color: var(--muted); }
+.mini-bar { width: 56px; height: 6px; background: var(--border); border-radius: 10px; overflow: hidden; }
+.mini-bar > div { height: 100%; border-radius: 10px; transition: width 0.5s; }
+.skill.mastered .mini-bar > div { background: var(--green); }
+.skill.current .mini-bar > div { background: var(--accent); }
+.skill.next .mini-bar > div { background: var(--accent); opacity: 0.4; }
+
+.go-btn {
+  width: 100%; border: none; color: white; border-radius: var(--radius);
+  padding: 1.1rem; font-family: var(--font-display); font-weight: 900; font-size: 1.05rem;
+  cursor: pointer; box-shadow: 0 6px 20px rgba(0,0,0,0.12); letter-spacing: -0.3px;
+  transition: all 0.18s; margin-top: 0.5rem;
+}
+#dashboard.kailea .go-btn { background: linear-gradient(135deg, var(--kailea), var(--kailea-2)); }
+#dashboard.kaleb .go-btn { background: linear-gradient(135deg, var(--kaleb), var(--kaleb-2)); }
+.go-btn:active { transform: scale(0.98); }
+
+.resume-banner {
+  background: linear-gradient(135deg, var(--orange-bg), var(--yellow-bg));
+  border: 2px solid var(--orange); border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem; display: flex; align-items: center; gap: 0.75rem;
+  cursor: pointer; transition: all 0.18s;
+}
+.resume-banner:active { transform: scale(0.98); }
+.resume-banner .ri { font-size: 1.5rem; }
+.resume-banner .rt { flex: 1; }
+.resume-banner .rt strong { font-family: var(--font-display); font-weight: 900; font-size: 0.95rem; display: block; }
+.resume-banner .rt span { font-size: 0.75rem; color: var(--muted); }
+
+/* === PRACTICE === */
+#practice { gap: 1rem; padding-bottom: 1.5rem; }
+.prac-head { display: flex; align-items: center; gap: 0.7rem; }
+.prac-head .icon-btn { background: var(--card); color: var(--text); box-shadow: var(--shadow); }
+.prac-head .skill-label { font-family: var(--font-display); font-weight: 900; font-size: 1rem; letter-spacing: -0.3px; }
+.prac-head .q-counter { margin-left: auto; font-size: 0.82rem; color: var(--muted); font-weight: 700; }
+
+.prog-track { background: var(--border); border-radius: 10px; height: 7px; overflow: hidden; }
+.prog-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #fb923c); border-radius: 10px; transition: width 0.4s ease; }
+
+.attempt-track {
+  display: flex; gap: 0.4rem; align-items: center; font-size: 0.72rem; color: var(--muted);
+}
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); transition: background 0.2s; }
+.dot.used { background: var(--red); }
+.dot.revealed { background: var(--orange); }
+.coin-pop {
+  margin-left: auto; display: flex; align-items: center; gap: 0.3rem;
+  background: var(--yellow-bg); padding: 0.25rem 0.65rem; border-radius: 20px;
+  font-size: 0.78rem; font-weight: 700; color: #92400e;
+}
+
+.q-card {
+  background: var(--card); border-radius: var(--radius); padding: 1.5rem 1.4rem;
+  box-shadow: var(--shadow); position: relative; overflow: hidden;
+  min-height: 140px; display: flex; flex-direction: column; justify-content: center;
+}
+.q-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--accent), #fb923c);
+}
+.q-tag {
+  font-family: var(--font-display); font-style: italic; font-weight: 700;
+  font-size: 0.78rem; color: var(--accent); margin-bottom: 0.6rem;
+}
+.q-text {
+  font-family: var(--font-display); font-weight: 900; font-size: 2rem;
+  line-height: 1.2; color: var(--text); letter-spacing: -1px;
+}
+.q-text.text-q { font-size: 1.4rem; }
+
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+@keyframes bounce-in { 0%{transform:scale(0.94)} 60%{transform:scale(1.04)} 100%{transform:scale(1)} }
 .shake { animation: shake 0.4s ease; }
-@keyframes bounce-in { 0%{transform:scale(0.95)} 60%{transform:scale(1.03)} 100%{transform:scale(1)} }
-.bounce { animation: bounce-in 0.3s ease; }
-.opts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
-.opt { background: var(--card); border: 2.5px solid var(--border); border-radius: var(--radius-sm); padding: 0.95rem 0.7rem; font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--text); cursor: pointer; transition: all 0.15s; text-align: center; box-shadow: 0 2px 6px rgba(80,100,200,0.06); }
+.bounce { animation: bounce-in 0.35s ease; }
+
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+.opt {
+  background: var(--card); border: 2.5px solid var(--border); border-radius: var(--radius-sm);
+  padding: 1rem 0.7rem; font-family: var(--font-display); font-weight: 900; font-size: 1.2rem;
+  color: var(--text); cursor: pointer; transition: all 0.15s;
+  text-align: center; box-shadow: 0 2px 6px rgba(120,80,40,0.04); letter-spacing: -0.5px;
+}
 .opt:active:not(:disabled) { transform: scale(0.96); }
-.opt.correct { border-color: var(--green); background: var(--green-light); color: #15803d; }
-.opt.wrong-ans { border-color: var(--red); background: var(--red-light); color: var(--red); }
-.opt.revealed-correct { border-color: var(--orange); background: var(--orange-light); color: var(--orange); }
+.opt.correct { border-color: var(--green); background: var(--green-bg); color: #065f46; }
+.opt.wrong-ans { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+.opt.revealed-correct { border-color: var(--orange); background: var(--orange-bg); color: #c2410c; }
 .opt:disabled { cursor: default; }
-.fb-box { border-radius: var(--radius-sm); padding: 0.9rem 1rem; font-size: 0.88rem; line-height: 1.5; display: none; }
+
+.fb-box {
+  border-radius: var(--radius-sm); padding: 1rem 1.1rem; font-size: 0.9rem;
+  line-height: 1.55; display: none;
+}
 .fb-box.show { display: block; }
-.fb-correct { background: var(--green-light); color: #15803d; border: 1.5px solid rgba(34,197,94,0.3); }
-.fb-wrong { background: var(--red-light); color: #b91c1c; border: 1.5px solid rgba(239,68,68,0.3); }
-.fb-revealed { background: var(--orange-light); color: #c2410c; border: 1.5px solid rgba(249,115,22,0.3); }
-.try-again-btn { width: 100%; border: 2.5px solid var(--red); background: white; color: var(--red); border-radius: var(--radius); padding: 1rem; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; cursor: pointer; transition: all 0.15s; display: none; }
-.try-again-btn.show { display: block; }
-.try-again-btn:active { background: var(--red-light); }
-.next-btn { width: 100%; border: none; background: linear-gradient(135deg, var(--blue), #7c3aed); color: white; border-radius: var(--radius); padding: 1.05rem; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 14px rgba(79,110,247,0.28); transition: all 0.15s; display: none; }
-.next-btn.show { display: block; }
+.fb-correct { background: var(--green-bg); color: #065f46; border: 1.5px solid #6ee7b7; }
+.fb-wrong { background: var(--red-bg); color: #991b1b; border: 1.5px solid #fca5a5; }
+.fb-revealed { background: var(--orange-bg); color: #9a3412; border: 1.5px solid #fdba74; }
+
+.fb-box .fb-title { font-family: var(--font-display); font-weight: 900; font-size: 1rem; margin-bottom: 0.3rem; }
+
+/* Visual breakdown */
+.breakdown {
+  margin-top: 0.75rem; background: white; border-radius: var(--radius-sm);
+  padding: 1rem; border: 1.5px solid var(--border);
+}
+.breakdown-title {
+  font-family: var(--font-display); font-style: italic; font-weight: 700;
+  font-size: 0.78rem; color: var(--muted); margin-bottom: 0.6rem;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.bd-columns {
+  display: flex; justify-content: center; gap: 0.5rem; padding: 0.5rem 0;
+  font-family: 'Courier New', monospace; font-size: 1.5rem; font-weight: 700;
+}
+.bd-col { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; min-width: 28px; }
+.bd-cell { line-height: 1; padding: 0.1rem 0; }
+.bd-cell.sm { font-size: 0.85rem; color: var(--orange); }
+.bd-cell.strike { text-decoration: line-through; color: var(--muted); }
+.bd-op { font-size: 1.5rem; align-self: center; padding: 0 0.3rem; color: var(--text); }
+.bd-line { width: 100%; height: 2px; background: var(--text); margin: 0.15rem 0; }
+.bd-result { color: var(--green); }
+.bd-explain {
+  font-size: 0.82rem; color: var(--muted); margin-top: 0.5rem;
+  line-height: 1.5; text-align: center;
+}
+
+.try-again-btn, .next-btn {
+  width: 100%; border-radius: var(--radius); padding: 1rem;
+  font-family: var(--font-display); font-weight: 900; font-size: 1rem;
+  cursor: pointer; transition: all 0.15s; display: none; letter-spacing: -0.3px;
+}
+.try-again-btn.show, .next-btn.show { display: block; }
+.try-again-btn { border: 2.5px solid var(--red); background: white; color: var(--red); }
+.try-again-btn:active { background: var(--red-bg); }
+.next-btn { border: none; color: white; box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+#practice.kailea .next-btn { background: linear-gradient(135deg, var(--kailea), var(--kailea-2)); }
+#practice.kaleb .next-btn { background: linear-gradient(135deg, var(--kaleb), var(--kaleb-2)); }
 .next-btn:active { transform: scale(0.98); }
 
-/* RESULTS */
-#results { background: var(--bg); align-items: center; justify-content: center; text-align: center; gap: 1.3rem; padding: 2.5rem 1.5rem; }
-.res-icon { font-size: 4.5rem; }
-.res-score { font-family: 'Nunito', sans-serif; font-size: 3.8rem; font-weight: 900; background: linear-gradient(135deg, var(--blue), #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
-.res-of { font-size: 1rem; color: var(--muted); margin-top: -0.3rem; }
-.res-msg { font-family: 'Nunito', sans-serif; font-size: 1.2rem; font-weight: 800; max-width: 280px; }
-.mastery-card { background: var(--card); border-radius: var(--radius); padding: 1.1rem 1.4rem; width: 100%; max-width: 340px; box-shadow: var(--shadow); }
-.mc-label { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.6rem; }
-.mc-skillname { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; margin-bottom: 0.5rem; }
-.mc-bar { background: var(--border); border-radius: 8px; height: 11px; overflow: hidden; margin-bottom: 0.35rem; }
-.mc-fill { height: 100%; border-radius: 8px; background: linear-gradient(90deg, var(--blue), #7c3aed); transition: width 1s ease; }
-.mc-pct { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.88rem; color: var(--blue); text-align: right; }
-.next-skill-note { background: var(--blue-light); border-radius: var(--radius-sm); padding: 0.75rem 1rem; width: 100%; max-width: 340px; font-size: 0.83rem; color: var(--blue-dark); font-weight: 600; display: none; }
-.next-skill-note.show { display: block; }
-.res-btns { display: flex; flex-direction: column; gap: 0.65rem; width: 100%; max-width: 340px; }
+/* Loading / Mascot */
+.mascot-wrap {
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem 0; min-height: 120px;
+}
+.mascot-wrap .ml { color: var(--muted); margin-top: 0.5rem; font-size: 0.85rem; text-align: center; }
 
-/* TOAST */
-.toast { position: fixed; top: 1.2rem; left: 50%; transform: translateX(-50%) translateY(-90px); background: #1a1f35; color: white; border-radius: var(--radius); padding: 0.7rem 1.3rem; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem; z-index: 300; box-shadow: var(--shadow-lg); transition: transform 0.35s ease; white-space: nowrap; pointer-events: none; }
+/* Axolotl swims back and forth */
+@keyframes swim {
+  0% { transform: translateX(-60px) scaleX(1); }
+  48% { transform: translateX(60px) scaleX(1); }
+  50% { transform: translateX(60px) scaleX(-1); }
+  98% { transform: translateX(-60px) scaleX(-1); }
+  100% { transform: translateX(-60px) scaleX(1); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+@keyframes munch {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.95); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.axolotl { animation: swim 4s ease-in-out infinite, wiggle 0.5s ease-in-out infinite; }
+.panda { animation: float 2s ease-in-out infinite, munch 0.6s ease-in-out infinite; }
+
+.bubble {
+  position: absolute; bottom: 0; background: rgba(255,107,157,0.3);
+  border-radius: 50%; animation: rise 3s linear infinite;
+}
+@keyframes rise {
+  0% { bottom: 0; opacity: 0.7; }
+  100% { bottom: 100%; opacity: 0; }
+}
+
+/* === RESULTS === */
+#results {
+  align-items: center; justify-content: center; text-align: center;
+  gap: 1.25rem; padding: 2rem 1.5rem;
+}
+.res-icon { font-size: 4.5rem; animation: bounce-in 0.6s ease; }
+.res-score {
+  font-family: var(--font-display); font-weight: 900; font-size: 4rem;
+  letter-spacing: -3px; line-height: 1;
+}
+#results.kailea .res-score { background: linear-gradient(135deg, var(--kailea), var(--kailea-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#results.kaleb .res-score { background: linear-gradient(135deg, var(--kaleb), var(--kaleb-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.res-of { font-size: 0.95rem; color: var(--muted); margin-top: -0.3rem; }
+.res-msg { font-family: var(--font-display); font-weight: 900; font-size: 1.3rem; max-width: 280px; letter-spacing: -0.5px; }
+
+.res-coins {
+  background: linear-gradient(135deg, var(--yellow-bg), var(--orange-bg));
+  border-radius: var(--radius); padding: 0.9rem 1.4rem;
+  font-family: var(--font-display); font-weight: 900; font-size: 1.15rem;
+  color: #92400e; display: flex; align-items: center; gap: 0.6rem;
+}
+
+.mastery-card {
+  background: var(--card); border-radius: var(--radius); padding: 1.2rem 1.4rem;
+  width: 100%; max-width: 360px; box-shadow: var(--shadow);
+}
+.mc-label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem; }
+.mc-skill { font-family: var(--font-display); font-weight: 900; font-size: 1.05rem; margin-bottom: 0.6rem; letter-spacing: -0.3px; }
+.mc-bar { background: var(--border); border-radius: 8px; height: 12px; overflow: hidden; margin-bottom: 0.4rem; }
+.mc-fill { height: 100%; border-radius: 8px; transition: width 1s ease; }
+#results.kailea .mc-fill { background: linear-gradient(90deg, var(--kailea), var(--kailea-2)); }
+#results.kaleb .mc-fill { background: linear-gradient(90deg, var(--kaleb), var(--kaleb-2)); }
+.mc-pct { font-family: var(--font-display); font-weight: 900; font-size: 0.95rem; text-align: right; }
+#results.kailea .mc-pct { color: var(--kailea); }
+#results.kaleb .mc-pct { color: var(--kaleb); }
+
+.note-box {
+  background: var(--green-bg); border-radius: var(--radius-sm); padding: 0.85rem 1rem;
+  width: 100%; max-width: 360px; font-size: 0.85rem; color: #065f46; font-weight: 600;
+  display: none; line-height: 1.5;
+}
+.note-box.show { display: block; }
+
+.res-actions { display: flex; flex-direction: column; gap: 0.65rem; width: 100%; max-width: 360px; }
+.btn-secondary { background: var(--card); color: var(--text); box-shadow: var(--shadow); }
+
+/* Toast */
+.toast {
+  position: fixed; top: 1rem; left: 50%; transform: translateX(-50%) translateY(-100px);
+  background: var(--text); color: white; border-radius: var(--radius);
+  padding: 0.8rem 1.4rem; font-family: var(--font-display); font-weight: 900;
+  font-size: 0.9rem; z-index: 300; box-shadow: var(--shadow-lg);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); white-space: nowrap;
+  pointer-events: none; letter-spacing: -0.3px;
+}
 .toast.show { transform: translateX(-50%) translateY(0); }
 
-@media (min-width: 500px) {
-  .screen { padding: 2rem; max-width: 460px; margin: 0 auto; }
-  .dash-hero { margin: -2rem -2rem 0; }
-  .dash-body { padding: 0.9rem 2rem 2rem; }
+/* Coin floating animation */
+@keyframes coin-float {
+  0% { transform: translate(-50%, 0) scale(0.5); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(-50%, -120px) scale(1.4); opacity: 0; }
+}
+.coin-float {
+  position: fixed; left: 50%; bottom: 50%;
+  font-size: 2.5rem; pointer-events: none; z-index: 250;
+  animation: coin-float 1s ease-out forwards;
 }
 </style>
 </head>
@@ -184,51 +471,83 @@ body { background: var(--bg); font-family: 'Nunito Sans', sans-serif; color: var
 
 <!-- HOME -->
 <div id="home" class="screen active">
-  <div class="app-brand">
-    <span class="logo-icon">🧮</span>
-    <h1>MathStack</h1>
-    <p class="tagline">Master math. One problem at a time.</p>
+  <div class="brand-mark">
+    <div class="logo">Math<span class="stack">stack</span></div>
+    <p class="tag">Master math · One problem at a time</p>
   </div>
-  <div class="student-list">
-    <p class="who-label">Who's practicing today?</p>
-    <div class="s-card" onclick="selectStudent('s1')">
-      <div class="av">👧</div>
-      <div class="si">
-        <div class="sname" id="s1-name">—</div>
-        <div class="sgrade" id="s1-grade">7th Grade · Math</div>
+  <div>
+    <p class="who-label">Who's practicing?</p>
+    <div class="kid-grid">
+      <div class="kid-card kailea" id="card-kailea" onclick="selectKid('kailea')">
+        <div class="kid-mascot kailea">
+          <svg width="44" height="44" viewBox="0 0 60 60">
+            <ellipse cx="30" cy="38" rx="20" ry="14" fill="#fff"/>
+            <ellipse cx="30" cy="38" rx="20" ry="14" fill="#ffb6c1" opacity="0.6"/>
+            <circle cx="22" cy="35" r="2" fill="#1c1917"/>
+            <circle cx="38" cy="35" r="2" fill="#1c1917"/>
+            <path d="M 25 42 Q 30 45 35 42" stroke="#1c1917" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M 12 32 L 8 26 L 14 30 Z" fill="#ff8fab"/>
+            <path d="M 12 38 L 6 38 L 12 42 Z" fill="#ff8fab"/>
+            <path d="M 12 44 L 8 50 L 14 46 Z" fill="#ff8fab"/>
+            <path d="M 48 32 L 52 26 L 46 30 Z" fill="#ff8fab"/>
+            <path d="M 48 38 L 54 38 L 48 42 Z" fill="#ff8fab"/>
+            <path d="M 48 44 L 52 50 L 46 46 Z" fill="#ff8fab"/>
+          </svg>
+        </div>
+        <div class="kid-info">
+          <div class="name" id="name-kailea">Kailea</div>
+          <div class="grade" id="grade-kailea">Grade 7 · Math</div>
+        </div>
+        <div class="kid-stats">
+          <div class="streak" id="streak-kailea">0🔥</div>
+          <div class="stat-l">Streak</div>
+          <div class="coins" id="coins-kailea">🪙 0</div>
+        </div>
       </div>
-      <div class="sstreak"><strong id="s1-streak">0🔥</strong><span>day streak</span></div>
-    </div>
-    <div class="s-card" onclick="selectStudent('s2')">
-      <div class="av">👦</div>
-      <div class="si">
-        <div class="sname" id="s2-name">—</div>
-        <div class="sgrade" id="s2-grade">5th Grade · Math</div>
+
+      <div class="kid-card kaleb" id="card-kaleb" onclick="selectKid('kaleb')">
+        <div class="kid-mascot kaleb">
+          <svg width="44" height="44" viewBox="0 0 60 60">
+            <circle cx="20" cy="20" r="8" fill="#1c1917"/>
+            <circle cx="40" cy="20" r="8" fill="#1c1917"/>
+            <circle cx="30" cy="32" r="18" fill="#fff"/>
+            <ellipse cx="22" cy="28" rx="5" ry="6" fill="#1c1917"/>
+            <ellipse cx="38" cy="28" rx="5" ry="6" fill="#1c1917"/>
+            <circle cx="22" cy="28" r="2" fill="#fff"/>
+            <circle cx="38" cy="28" r="2" fill="#fff"/>
+            <ellipse cx="30" cy="36" rx="3" ry="2.5" fill="#1c1917"/>
+            <path d="M 30 38 Q 27 42 25 41" stroke="#1c1917" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M 30 38 Q 33 42 35 41" stroke="#1c1917" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="kid-info">
+          <div class="name" id="name-kaleb">Kaleb</div>
+          <div class="grade" id="grade-kaleb">Grade 5 · Math</div>
+        </div>
+        <div class="kid-stats">
+          <div class="streak" id="streak-kaleb">0🔥</div>
+          <div class="stat-l">Streak</div>
+          <div class="coins" id="coins-kaleb">🪙 0</div>
+        </div>
       </div>
-      <div class="sstreak"><strong id="s2-streak">0🔥</strong><span>day streak</span></div>
     </div>
   </div>
-  <p class="home-note">⚙️ First time? Tap a name to set up the profile and enter your API key.</p>
+  <p class="home-foot">Tap a name to start practicing.<br><a onclick="resetAll()">Reset all data</a></p>
 </div>
 
 <!-- SETUP -->
 <div id="setup" class="screen">
-  <div class="setup-top">
+  <div class="setup-head">
     <h2 id="setup-title">Set Up Profile</h2>
     <p id="setup-sub">Personalize the experience</p>
   </div>
-  <div class="field-card">
-    <label>Student Name</label>
-    <input type="text" id="f-name" placeholder="e.g. Ella" maxlength="20">
+  <div class="field">
+    <label>Name</label>
+    <input type="text" id="f-name" maxlength="20">
   </div>
-  <div class="field-card">
+  <div class="field">
     <label>Grade Level</label>
-    <input type="number" id="f-grade" placeholder="e.g. 7" min="1" max="9">
-  </div>
-  <div class="field-card">
-    <label>Anthropic API Key</label>
-    <input type="password" id="f-key" placeholder="sk-ant-...">
-    <p class="field-note">Get yours at console.anthropic.com → API Keys. Stored only on this device.</p>
+    <input type="number" id="f-grade" min="1" max="9">
   </div>
   <button class="btn btn-primary" onclick="saveSetup()">Save & Start →</button>
   <button class="btn btn-ghost" onclick="showScreen('home')">← Back</button>
@@ -236,25 +555,33 @@ body { background: var(--bg); font-family: 'Nunito Sans', sans-serif; color: var
 
 <!-- DASHBOARD -->
 <div id="dashboard" class="screen">
-  <div class="dash-hero">
-    <div class="dh-row">
-      <button class="dh-back" onclick="showScreen('home')">←</button>
-      <div class="dh-name-wrap">
-        <div class="dh-name" id="dh-name">—</div>
-        <div class="dh-sub" id="dh-sub">—</div>
+  <div class="dash-hero" id="dash-hero">
+    <div class="dash-top">
+      <button class="icon-btn" onclick="showScreen('home')">←</button>
+      <div class="dash-name-block">
+        <div class="dash-name" id="dash-name">—</div>
+        <div class="dash-greeting" id="dash-greeting">—</div>
       </div>
-      <div style="width:38px"></div>
+      <button class="icon-btn" onclick="showSetup(G.cur)" title="Edit profile">⚙️</button>
     </div>
     <div class="dash-stats">
-      <div class="dstat"><div class="dv" id="ds-streak">0🔥</div><div class="dl">Streak</div></div>
-      <div class="dstat"><div class="dv" id="ds-mastered">0</div><div class="dl">Mastered</div></div>
-      <div class="dstat"><div class="dv" id="ds-total">0</div><div class="dl">Problems</div></div>
+      <div class="dstat"><div class="v" id="ds-streak">0🔥</div><div class="l">Streak</div></div>
+      <div class="dstat"><div class="v" id="ds-mastered">0</div><div class="l">Mastered</div></div>
+      <div class="dstat"><div class="v" id="ds-coins">🪙 0</div><div class="l">Coins</div></div>
     </div>
   </div>
   <div class="dash-body">
+    <div class="resume-banner" id="resume-banner" style="display:none" onclick="resumeSession()">
+      <span class="ri">⏸️</span>
+      <div class="rt"><strong>Resume your session?</strong><span id="resume-detail">—</span></div>
+      <span style="font-size:1.2rem">→</span>
+    </div>
     <div>
-      <div class="sec-title">📚 Skill Progression</div>
-      <div class="skill-list" id="skill-list"></div>
+      <div class="section-head">
+        <h3>Skill Progression</h3>
+        <span class="sub">Master 80% to unlock</span>
+      </div>
+      <div class="skill-stack" id="skill-list"></div>
     </div>
     <button class="go-btn" onclick="startRecommended()">⚡ Start Today's Practice</button>
   </div>
@@ -262,24 +589,23 @@ body { background: var(--bg); font-family: 'Nunito Sans', sans-serif; color: var
 
 <!-- PRACTICE -->
 <div id="practice" class="screen">
-  <div class="prac-header">
-    <button class="prac-back" onclick="confirmBack()">←</button>
-    <div class="prac-skill" id="prac-skill-label">Skill</div>
-    <div class="prac-count" id="prac-count">0 / 30</div>
+  <div class="prac-head">
+    <button class="icon-btn" onclick="confirmExit()">←</button>
+    <div class="skill-label" id="prac-skill-label">Skill</div>
+    <div class="q-counter" id="q-counter">0 / 15</div>
   </div>
-  <div class="prog-wrap">
-    <div class="prog-fill" id="prog-fill" style="width:0%"></div>
-  </div>
-  <div class="attempt-row" id="attempt-row">
-    <div class="attempt-dot" id="adot-0"></div>
-    <div class="attempt-dot" id="adot-1"></div>
-    <span class="attempt-label">attempts this question</span>
+  <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  <div class="attempt-track">
+    <div class="dot" id="dot-0"></div>
+    <div class="dot" id="dot-1"></div>
+    <span>attempts</span>
+    <div class="coin-pop">🪙 <span id="session-coins">0</span></div>
   </div>
   <div class="q-card" id="q-card">
-    <div class="q-tag">QUESTION <span id="q-num">1</span></div>
-    <div class="q-text loading" id="q-text">Generating question…</div>
+    <div class="q-tag">Question <span id="q-num">1</span></div>
+    <div class="q-text" id="q-text">—</div>
   </div>
-  <div class="opts-grid" id="opts-grid"></div>
+  <div class="opts" id="opts-grid"></div>
   <div class="fb-box" id="fb-box"></div>
   <button class="try-again-btn" id="try-again-btn" onclick="tryAgain()">↺ Try Again</button>
   <button class="next-btn" id="next-btn" onclick="nextQ()">Next Question →</button>
@@ -289,276 +615,686 @@ body { background: var(--bg); font-family: 'Nunito Sans', sans-serif; color: var
 <div id="results" class="screen">
   <div class="res-icon" id="res-icon">🏆</div>
   <div class="res-score" id="res-score">—</div>
-  <div class="res-of" id="res-of">correct out of 30</div>
-  <div class="res-msg" id="res-msg">Great work!</div>
+  <div class="res-of" id="res-of">correct out of 15</div>
+  <div class="res-msg" id="res-msg">—</div>
+  <div class="res-coins" id="res-coins">🪙 +0 coins</div>
   <div class="mastery-card">
     <div class="mc-label">Mastery Update</div>
-    <div class="mc-skillname" id="mc-skill">—</div>
+    <div class="mc-skill" id="mc-skill">—</div>
     <div class="mc-bar"><div class="mc-fill" id="mc-fill" style="width:0%"></div></div>
     <div class="mc-pct" id="mc-pct">0%</div>
   </div>
-  <div class="next-skill-note" id="next-skill-note"></div>
-  <div class="res-btns">
+  <div class="note-box" id="note-box"></div>
+  <div class="res-actions">
     <button class="btn btn-primary" onclick="practiceAgain()">Practice Again 🔁</button>
-    <button class="btn" style="background:var(--card);color:var(--text);box-shadow:var(--shadow)" onclick="goDash()">Back to Skills</button>
+    <button class="btn btn-secondary" onclick="goDash()">Back to Skills</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ── SKILL TREES ────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════
+// MATHSTACK v2 - Local-only kids math practice
+// Core principle: deterministic generation, never trust LLM with answers
+// ═══════════════════════════════════════════════════════════════════════════
 
-// S1: 7th grade student working UP from 3-digit subtraction
-const SKILLS_S1 = [
-  { id:'sub3',        name:'3-Digit Subtraction',     icon:'➖', desc:'e.g. 847 − 293, with borrowing',          prompt:'Generate 3-digit subtraction problems with borrowing. Numbers 100-999. Examples: 847-293, 502-178, 634-457.' },
-  { id:'sub4',        name:'4-Digit Subtraction',     icon:'➖', desc:'e.g. 5,043 − 1,867',                       prompt:'4-digit subtraction with borrowing including across zeros. e.g. 5043-1867, 8000-2345.' },
-  { id:'mult_facts',  name:'Multiplication Facts',    icon:'✖️', desc:'Times tables 1–12',                        prompt:'Multiplication facts, times tables 1-12. Single digit × single digit and single × double digit. e.g. 7×8, 6×12, 9×7.' },
-  { id:'mult_2dig',   name:'Multi-Digit Multiply',    icon:'✖️', desc:'e.g. 34 × 27',                             prompt:'Two-digit by two-digit multiplication. e.g. 34×27, 56×43. Show the full problem clearly.' },
-  { id:'div_facts',   name:'Division Facts',          icon:'➗', desc:'Dividing up to 144 ÷ 12',                  prompt:'Basic division facts, divisors 1-12, dividends up to 144. e.g. 72÷8, 132÷11. No remainders.' },
-  { id:'div_long',    name:'Long Division',           icon:'➗', desc:'e.g. 378 ÷ 6, with remainders',            prompt:'Long division with 3-digit dividends and single-digit divisors. May have remainders. e.g. 378÷6, 245÷7.' },
-  { id:'frac_basic',  name:'Fraction Basics',        icon:'½',  desc:'Simplifying & equivalent fractions',       prompt:'Simplifying fractions to lowest terms and identifying equivalent fractions. Grade 5-6 level.' },
-  { id:'frac_add',    name:'Adding Fractions',        icon:'½',  desc:'Like & unlike denominators',               prompt:'Adding and subtracting fractions with like and unlike denominators. Include some mixed numbers.' },
-  { id:'frac_mult',   name:'Multiplying Fractions',   icon:'½',  desc:'Fractions × fractions & whole numbers',    prompt:'Multiplying fractions by fractions and by whole numbers. e.g. 2/3 × 3/4, 5 × 2/3.' },
-  { id:'decimals',    name:'Decimals',                icon:'.0', desc:'Add, subtract, multiply decimals',         prompt:'Operations with decimals: addition, subtraction, and multiplication. Up to 3 decimal places.' },
-  { id:'percent',     name:'Percents',                icon:'%',  desc:'%, discounts, tax, tip',                   prompt:'Percent problems: finding percent of a number, percent discount, sales tax, tip. Real-world contexts.' },
-  { id:'integers',    name:'Integers',                icon:'±',  desc:'Negative numbers & operations',            prompt:'Operations with positive and negative integers: addition, subtraction, multiplication. e.g. -5 + 8, 3 × (-4).' },
-];
-
-// S2: 5th grade student — starting at subtraction to 20, progressing up
-const SKILLS_S2 = [
-  { id:'sub_20',      name:'Subtraction to 20',       icon:'➖', desc:'e.g. 20 − 7, 18 − 9, 12 − 5',            prompt:'Subtraction where the top number is between 10-20 and bottom number is a single digit 1-9. ONLY use numbers in this range. Examples exactly like: 20-7, 18-9, 15-8, 12-6, 17-9, 14-5, 13-7. No other number ranges.' },
-  { id:'sub_2dig',    name:'2-Digit Subtraction',     icon:'➖', desc:'e.g. 45 − 23, 67 − 38',                   prompt:'Two-digit subtraction. Mix of no-borrowing (e.g. 47-23) and simple borrowing (e.g. 52-37). Keep it beginner friendly.' },
-  { id:'sub_borrow',  name:'Subtraction w/ Borrowing',icon:'➖', desc:'e.g. 73 − 48, 82 − 35',                   prompt:'Two-digit subtraction requiring borrowing in ones and tens place. e.g. 73-48, 82-35, 61-27.' },
-  { id:'add_2dig',    name:'Addition to 100',         icon:'➕', desc:'e.g. 47 + 38, with carrying',              prompt:'Two-digit addition with and without carrying. e.g. 47+38, 56+27, 34+45.' },
-  { id:'sub_3dig',    name:'3-Digit Subtraction',     icon:'➖', desc:'e.g. 342 − 178',                           prompt:'3-digit subtraction with borrowing. e.g. 342-178, 500-234, 721-359. Keep numbers under 1000.' },
-  { id:'mult_facts',  name:'Multiplication Basics',   icon:'✖️', desc:'Times tables 1–10',                        prompt:'Basic multiplication facts, times tables 1-10. Keep it very clear and beginner friendly. e.g. 3×4, 7×6, 5×8.' },
-  { id:'mult_2dig',   name:'Multiply by 2-Digits',    icon:'✖️', desc:'e.g. 24 × 3, 13 × 12',                    prompt:'Multiplication: 2-digit by 1-digit and simple 2-digit by 2-digit. e.g. 24×3, 35×4, 12×11.' },
-  { id:'div_facts',   name:'Division Basics',         icon:'➗', desc:'Dividing up to 100 ÷ 10',                  prompt:'Basic division facts, divisors 1-10, dividends up to 100. No remainders. e.g. 56÷8, 42÷6, 90÷9.' },
-  { id:'frac_intro',  name:'Fraction Intro',          icon:'½',  desc:'What fractions mean, comparing',           prompt:'Introduction to fractions: identifying what fraction is shaded, comparing ½ ⅓ ¼ ⅔. Very beginner-friendly, visual descriptions.' },
-  { id:'frac_add',    name:'Adding Fractions',        icon:'½',  desc:'Same denominator fractions',               prompt:'Adding and subtracting fractions with same denominator only. e.g. 1/4 + 2/4, 3/5 - 1/5. Grade 4-5 level.' },
-];
-
-// ── CONSTANTS ───────────────────────────────────────────────────────────────
-const TOTAL_QS = 30;
+const KIDS = {
+  kailea: { name: 'Kailea', grade: 7, mascot: '🦎', greeting: ['Hey Kailea!', "What's up, Kailea?", 'Ready, Kailea?', 'Let\'s go, Kailea!'] },
+  kaleb:  { name: 'Kaleb',  grade: 5, mascot: '🐼', greeting: ['Hey Kaleb!', "What's up, Kaleb?", 'Ready, Kaleb?', 'Let\'s go, Kaleb!'] }
+};
+const TOTAL_QS = 15;
 const MAX_ATTEMPTS = 2;
-const DEFAULTS = { s1: { name:'Ella', grade:7, emoji:'👧' }, s2: { name:'Buddy', grade:5, emoji:'👦' } };
+const COINS_FIRST_TRY = 10;
+const COINS_SECOND_TRY = 5;
+const COINS_PERFECT_BONUS = 50;
+const MASTERY_WINDOW = 5;
+const MASTERY_MIN_SESSIONS = 3;
 
-// ── STATE ────────────────────────────────────────────────────────────────────
-let G = { apiKey:null, students:{}, cur:null, session:{} };
+let SKILLS = null;  // loaded from skills.json
+let G = { apiKey: null, kids: {} };
+let session = null;  // active practice session
+let _setupKid = null;
 
-function getSkills(sid) { return sid === 's1' ? SKILLS_S1 : SKILLS_S2; }
-
-// ── PERSISTENCE ──────────────────────────────────────────────────────────────
+// ═══ PERSISTENCE ════════════════════════════════════════════════════════════
 function load() {
   try {
     const d = JSON.parse(localStorage.getItem('mathstack_v2') || '{}');
     G.apiKey = d.apiKey || null;
-    G.students = d.students || {};
-    ['s1','s2'].forEach(sid => {
-      if (!G.students[sid]) G.students[sid] = { name:DEFAULTS[sid].name, grade:DEFAULTS[sid].grade, streak:0, total:0, lastDate:null, skills:{} };
+    G.kids = d.kids || {};
+    ['kailea','kaleb'].forEach(k => {
+      if (!G.kids[k]) G.kids[k] = {
+        name: KIDS[k].name, grade: KIDS[k].grade,
+        streak: 0, totalQ: 0, coins: 0, lastDate: null,
+        skills: {}  // skillId: { recent: [pct, pct, ...], attempts: n }
+      };
     });
-  } catch(e) {}
-  refreshHome();
+  } catch(e) { console.error('Load failed', e); }
 }
-function save() { localStorage.setItem('mathstack_v2', JSON.stringify({ apiKey:G.apiKey, students:G.students })); }
+function save() {
+  localStorage.setItem('mathstack_v2', JSON.stringify({ apiKey: G.apiKey, kids: G.kids }));
+}
+function saveSession() {
+  if (session) localStorage.setItem('mathstack_session', JSON.stringify(session));
+  else localStorage.removeItem('mathstack_session');
+}
+function loadSession() {
+  try { return JSON.parse(localStorage.getItem('mathstack_session') || 'null'); }
+  catch(e) { return null; }
+}
 
-// ── NAV ───────────────────────────────────────────────────────────────────────
-function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
+async function loadSkills() {
+  try {
+    const r = await fetch('skills.json');
+    SKILLS = await r.json();
+  } catch(e) {
+    console.error('Failed to load skills.json', e);
+    alert('Could not load skills.json. Make sure it\'s in the same folder as this HTML file.');
+  }
+}
 
-// ── HOME ───────────────────────────────────────────────────────────────────────
+// ═══ NAV ════════════════════════════════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ═══ HOME ═══════════════════════════════════════════════════════════════════
 function refreshHome() {
-  ['s1','s2'].forEach((sid,i) => {
-    const s = G.students[sid]; const n = i+1;
-    document.getElementById(`s${n}-name`).textContent = s.name;
-    document.getElementById(`s${n}-grade`).textContent = `${s.grade}th Grade · Math`;
-    document.getElementById(`s${n}-streak`).textContent = `${s.streak}🔥`;
+  ['kailea','kaleb'].forEach(k => {
+    const kid = G.kids[k];
+    document.getElementById(`name-${k}`).textContent = kid.name;
+    document.getElementById(`grade-${k}`).textContent = `Grade ${kid.grade} · Math`;
+    document.getElementById(`streak-${k}`).textContent = `${kid.streak}🔥`;
+    document.getElementById(`coins-${k}`).textContent = `🪙 ${kid.coins || 0}`;
   });
 }
-function selectStudent(sid) { G.cur = sid; if (!G.apiKey) { showSetup(sid); return; } showDash(sid); }
 
-// ── SETUP ─────────────────────────────────────────────────────────────────────
-let _sid = null;
-function showSetup(sid) {
-  _sid = sid; const s = G.students[sid];
-  document.getElementById('setup-title').textContent = `Set Up ${DEFAULTS[sid].emoji} Profile`;
-  document.getElementById('setup-sub').textContent = `Grade ${s.grade} · Math`;
-  document.getElementById('f-name').value = s.name !== DEFAULTS[sid].name ? s.name : '';
-  document.getElementById('f-grade').value = s.grade;
-  document.getElementById('f-key').value = G.apiKey || '';
+function selectKid(k) {
+  G.cur = k;
+  showDash(k);
+}
+
+function resetAll() {
+  if (!confirm('Reset ALL data for both kids? This cannot be undone.')) return;
+  localStorage.removeItem('mathstack_v2');
+  localStorage.removeItem('mathstack_session');
+  load(); refreshHome();
+  showToast('All data reset');
+}
+
+// ═══ SETUP ══════════════════════════════════════════════════════════════════
+function showSetup(k) {
+  _setupKid = k;
+  const kid = G.kids[k];
+  document.getElementById('setup-title').textContent = `${KIDS[k].mascot} ${KIDS[k].name}`;
+  document.getElementById('setup-sub').textContent = `Edit profile`;
+  document.getElementById('f-name').value = kid.name;
+  document.getElementById('f-grade').value = kid.grade;
   showScreen('setup');
 }
 function saveSetup() {
   const name = document.getElementById('f-name').value.trim();
   const grade = parseInt(document.getElementById('f-grade').value);
-  const key = document.getElementById('f-key').value.trim();
-  if (!name) { alert('Enter a name'); return; }
-  if (!grade || grade<1||grade>9) { alert('Enter grade 1–9'); return; }
-  if (!key||!key.startsWith('sk-')) { alert('Enter a valid API key starting with sk-'); return; }
-  G.students[_sid].name = name; G.students[_sid].grade = grade; G.apiKey = key;
-  save(); refreshHome(); showDash(_sid);
+  if (!name) return alert('Enter a name');
+  if (!grade || grade < 1 || grade > 9) return alert('Grade 1–9');
+  G.kids[_setupKid].name = name;
+  G.kids[_setupKid].grade = grade;
+  save(); refreshHome(); showDash(_setupKid);
 }
 
-// ── DASHBOARD ─────────────────────────────────────────────────────────────────
-function getMastery(sid, skillId) { return G.students[sid].skills[skillId]?.mastery || 0; }
-function curSkillIdx(sid) { const sk = getSkills(sid); for(let i=0;i<sk.length;i++){if(getMastery(sid,sk[i].id)<80)return i;} return sk.length-1; }
+// ═══ MASTERY CALC ═══════════════════════════════════════════════════════════
+function getMastery(k, skillId) {
+  const s = G.kids[k].skills[skillId];
+  if (!s || !s.recent || s.recent.length === 0) return 0;
+  const avg = s.recent.reduce((a,b) => a+b, 0) / s.recent.length;
+  // If fewer than min sessions, cap mastery at 70 so they can't auto-master from one good run
+  if (s.recent.length < MASTERY_MIN_SESSIONS) return Math.min(70, Math.round(avg));
+  return Math.round(avg);
+}
+function curSkillIdx(k) {
+  const list = SKILLS[k];
+  for (let i = 0; i < list.length; i++) {
+    if (getMastery(k, list[i].id) < 80) return i;
+  }
+  return list.length - 1;
+}
 
-function showDash(sid) {
-  const s = G.students[sid]; const skills = getSkills(sid);
-  document.getElementById('dh-name').textContent = `${DEFAULTS[sid].emoji} ${s.name}`;
-  document.getElementById('dh-sub').textContent = `Grade ${s.grade} · Math`;
-  document.getElementById('ds-streak').textContent = `${s.streak}🔥`;
-  document.getElementById('ds-mastered').textContent = skills.filter(sk=>getMastery(sid,sk.id)>=80).length;
-  document.getElementById('ds-total').textContent = s.total||0;
+// ═══ DASHBOARD ══════════════════════════════════════════════════════════════
+function showDash(k) {
+  const kid = G.kids[k]; const list = SKILLS[k];
+  document.getElementById('dashboard').className = `screen active ${k}`;
+  document.getElementById('dash-hero').className = `dash-hero ${k}`;
+  document.getElementById('dash-name').innerHTML = `${KIDS[k].mascot} <span class="em">${kid.name}</span>`;
+  const greet = KIDS[k].greeting[Math.floor(Math.random() * KIDS[k].greeting.length)];
+  document.getElementById('dash-greeting').textContent = `${greet} Grade ${kid.grade}`;
+  document.getElementById('ds-streak').textContent = `${kid.streak}🔥`;
+  document.getElementById('ds-mastered').textContent = list.filter(s => getMastery(k, s.id) >= 80).length;
+  document.getElementById('ds-coins').textContent = `🪙 ${kid.coins || 0}`;
 
-  const list = document.getElementById('skill-list'); list.innerHTML = '';
-  skills.forEach((sk, i) => {
-    const m = getMastery(sid, sk.id);
-    const prevOk = i===0 || getMastery(sid,skills[i-1].id)>=40;
-    let cls='sk-new', label='START';
-    if (m>=80) { cls='sk-mastered'; label='✓ Done'; }
-    else if (m>0) { cls='sk-current'; label=`${m}%`; }
-    else if (!prevOk) { cls='sk-locked'; label='🔒'; }
-    else if (i===curSkillIdx(sid)) { cls='sk-current'; label='Current'; }
+  // Resume banner
+  const saved = loadSession();
+  const banner = document.getElementById('resume-banner');
+  if (saved && saved.kid === k && saved.qIndex < TOTAL_QS) {
+    const skill = list.find(s => s.id === saved.skillId);
+    if (skill) {
+      banner.style.display = 'flex';
+      document.getElementById('resume-detail').textContent = `${skill.icon} ${skill.name} · question ${saved.qIndex + 1} of ${TOTAL_QS}`;
+    } else { banner.style.display = 'none'; }
+  } else { banner.style.display = 'none'; }
+
+  // Skill list
+  const stack = document.getElementById('skill-list');
+  stack.innerHTML = '';
+  const cur = curSkillIdx(k);
+  list.forEach((sk, i) => {
+    const m = getMastery(k, sk.id);
+    const prevM = i === 0 ? 100 : getMastery(k, list[i-1].id);
+    const unlocked = i === 0 || prevM >= 40;
+    let cls, label;
+    if (m >= 80) { cls = 'mastered'; label = '✓ Mastered'; }
+    else if (!unlocked) { cls = 'locked'; label = '🔒'; }
+    else if (i === cur) { cls = 'current'; label = m > 0 ? `${m}%` : 'Start'; }
+    else { cls = 'next'; label = m > 0 ? `${m}%` : '—'; }
 
     const row = document.createElement('div');
-    row.className = `sk-row ${cls}`;
-    row.innerHTML = `<div class="sk-icon">${sk.icon}</div><div class="sk-info"><div class="skn">${sk.name}</div><div class="skd">${sk.desc}</div></div><div class="sk-right"><div class="sk-pct">${label}</div><div class="mini-bar"><div class="mini-bar-fill" style="width:${m}%"></div></div></div>`;
-    if (cls !== 'sk-locked') row.onclick = () => beginSession(sk);
-    list.appendChild(row);
+    row.className = `skill ${cls}`;
+    row.innerHTML = `
+      <div class="skill-icon">${sk.icon}</div>
+      <div class="skill-info">
+        <div class="n">${sk.name}</div>
+        <div class="d">${sk.desc}</div>
+      </div>
+      <div class="skill-right">
+        <div class="skill-pct">${label}</div>
+        <div class="mini-bar"><div style="width:${m}%"></div></div>
+      </div>
+    `;
+    if (cls !== 'locked') row.onclick = () => beginSession(sk);
+    stack.appendChild(row);
   });
   showScreen('dashboard');
 }
 
-function startRecommended() { const sk = getSkills(G.cur); beginSession(sk[curSkillIdx(G.cur)]); }
+function startRecommended() {
+  const list = SKILLS[G.cur];
+  beginSession(list[curSkillIdx(G.cur)]);
+}
 
-// ── PRACTICE ──────────────────────────────────────────────────────────────────
+function resumeSession() {
+  const saved = loadSession();
+  if (!saved) return;
+  session = saved;
+  G.cur = saved.kid;
+  const list = SKILLS[G.cur];
+  const skill = list.find(s => s.id === saved.skillId);
+  document.getElementById('practice').className = `screen active ${G.cur}`;
+  document.getElementById('prac-skill-label').textContent = `${skill.icon} ${skill.name}`;
+  updateProg(); renderQ();
+  showScreen('practice');
+}
+
+// ═══ DETERMINISTIC QUESTION GENERATION ══════════════════════════════════════
+// This is the heart of the trustworthy math. We generate problems in JS,
+// compute the answer in JS, and build wrong answers from common mistakes.
+// LLM is never trusted with arithmetic.
+
+function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+function rnd(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+function uniqueWrongs(correct, candidates, count = 3) {
+  const set = new Set([correct]);
+  const wrongs = [];
+  for (const c of candidates) {
+    if (!set.has(c) && c >= 0 || (typeof c === 'string' && !set.has(c))) {
+      set.add(c); wrongs.push(c);
+      if (wrongs.length >= count) break;
+    }
+  }
+  // Pad with random plausible numbers if we don't have enough
+  while (wrongs.length < count && typeof correct === 'number') {
+    const range = Math.max(10, Math.abs(correct));
+    const offset = rnd(1, Math.max(5, Math.floor(range * 0.3)));
+    const candidate = Math.random() < 0.5 ? correct + offset : correct - offset;
+    if (!set.has(candidate) && candidate >= 0) {
+      set.add(candidate); wrongs.push(candidate);
+    }
+  }
+  return wrongs;
+}
+
+function buildMC(correct, wrongs) {
+  const all = shuffle([correct, ...wrongs]);
+  const correctIdx = all.indexOf(correct);
+  const letters = ['A','B','C','D'];
+  return {
+    options: all.map((v, i) => ({ letter: letters[i], value: v, label: `${letters[i]}) ${v}` })),
+    correctLetter: letters[correctIdx],
+    correctValue: correct
+  };
+}
+
+const GENERATORS = {
+  subtraction(cfg) {
+    let a, b, attempts = 0;
+    do {
+      a = rnd(cfg.minTop, cfg.maxTop);
+      b = rnd(cfg.minBot, cfg.maxBot);
+      if (b > a) [a, b] = [b, a];  // swap so top is bigger
+      if (cfg.requireBorrow) {
+        // Require at least one borrow column
+        const aStr = a.toString(); const bStr = b.toString().padStart(aStr.length, '0');
+        let needsBorrow = false;
+        for (let i = aStr.length - 1; i >= 0; i--) {
+          if (parseInt(bStr[i]) > parseInt(aStr[i])) { needsBorrow = true; break; }
+        }
+        if (needsBorrow) break;
+      } else {
+        break;
+      }
+      attempts++;
+    } while (attempts < 50);
+
+    const correct = a - b;
+    const wrongs = uniqueWrongs(correct, [
+      a + b,                              // added instead
+      correct + 10,                        // off by 10 (forgot to borrow)
+      correct - 10,                        // off by 10 other way
+      correct + 1,                         // off by 1
+      correct - 1
+    ]);
+    const mc = buildMC(correct, wrongs);
+    return {
+      questionText: `${a.toLocaleString()} − ${b.toLocaleString()} = ?`,
+      ...mc,
+      breakdown: { type: 'sub-columns', a, b, result: correct }
+    };
+  },
+
+  addition(cfg) {
+    let a, b;
+    do {
+      a = rnd(cfg.minA, cfg.maxA);
+      b = rnd(cfg.minB, cfg.maxB);
+    } while (a + b > (cfg.maxSum || Infinity));
+    const correct = a + b;
+    const wrongs = uniqueWrongs(correct, [
+      Math.abs(a - b),
+      correct - 10,
+      correct + 10,
+      correct - 1,
+      correct + 1
+    ]);
+    const mc = buildMC(correct, wrongs);
+    return {
+      questionText: `${a.toLocaleString()} + ${b.toLocaleString()} = ?`,
+      ...mc,
+      breakdown: { type: 'add-columns', a, b, result: correct }
+    };
+  },
+
+  multiplication(cfg) {
+    const a = rnd(cfg.minA, cfg.maxA);
+    const b = rnd(cfg.minB, cfg.maxB);
+    const correct = a * b;
+    const wrongs = uniqueWrongs(correct, [
+      a + b,                              // added instead
+      correct + a,                        // one too many
+      correct - a,                        // one too few
+      a * (b + 1),                        // off-by-one factor
+      a * (b - 1)
+    ]);
+    const mc = buildMC(correct, wrongs);
+    return {
+      questionText: `${a.toLocaleString()} × ${b.toLocaleString()} = ?`,
+      ...mc,
+      breakdown: { type: 'mult', a, b, result: correct }
+    };
+  },
+
+  division(cfg) {
+    let dividend, divisor, quotient, remainder;
+    if (cfg.noRemainder) {
+      divisor = rnd(cfg.minDivisor, cfg.maxDivisor);
+      quotient = rnd(2, cfg.maxQuotient);
+      dividend = divisor * quotient;
+      remainder = 0;
+    } else {
+      divisor = rnd(cfg.minDivisor, cfg.maxDivisor);
+      dividend = rnd(cfg.minDividend || divisor * 2, cfg.maxDividend || divisor * 50);
+      quotient = Math.floor(dividend / divisor);
+      remainder = dividend % divisor;
+    }
+    const correct = remainder === 0 ? quotient : `${quotient} R${remainder}`;
+    let wrongs;
+    if (remainder === 0) {
+      wrongs = uniqueWrongs(quotient, [
+        quotient + 1, quotient - 1, divisor + dividend, dividend - divisor
+      ]);
+    } else {
+      wrongs = [
+        `${quotient + 1} R${remainder}`,
+        `${quotient} R${(remainder + 1) % divisor}`,
+        `${quotient - 1} R${remainder}`
+      ];
+    }
+    const mc = buildMC(correct, wrongs);
+    return {
+      questionText: `${dividend.toLocaleString()} ÷ ${divisor} = ?`,
+      ...mc,
+      breakdown: { type: 'div', dividend, divisor, quotient, remainder }
+    };
+  },
+
+  simplify_fraction() {
+    // Pick a simple fraction in lowest terms, then multiply
+    const denom = rnd(2, 9); const num = rnd(1, denom - 1);
+    if (gcd(num, denom) !== 1) return this.simplify_fraction();
+    const mult = rnd(2, 6);
+    const showNum = num * mult; const showDen = denom * mult;
+    const correct = `${num}/${denom}`;
+    const wrongs = [
+      `${num+1}/${denom}`,
+      `${num}/${denom+1}`,
+      `${showNum}/${showDen}`
+    ];
+    const mc = buildMC(correct, wrongs);
+    return {
+      questionText: `Simplify ${showNum}/${showDen}`,
+      ...mc,
+      breakdown: { type: 'text', text: `Both ${showNum} and ${showDen} divide by ${mult}. So ${showNum}÷${mult} = ${num} and ${showDen}÷${mult} = ${denom}. Simplified: ${num}/${denom}` }
+    };
+  },
+
+  add_fractions() {
+    // Sometimes same denom, sometimes unlike (small denoms only)
+    const sameDenom = Math.random() < 0.5;
+    if (sameDenom) {
+      const d = rnd(3, 10);
+      const a = rnd(1, d - 1); const b = rnd(1, d - a);
+      const sumNum = a + b;
+      const g = gcd(sumNum, d);
+      const correct = `${sumNum/g}/${d/g}`;
+      const wrongs = [`${a+b}/${d+d}`, `${a*b}/${d}`, `${sumNum+1}/${d}`];
+      const mc = buildMC(correct, wrongs);
+      return {
+        questionText: `${a}/${d} + ${b}/${d} = ?`,
+        ...mc,
+        breakdown: { type: 'text', text: `Same denominators, so add the tops: ${a} + ${b} = ${sumNum}. Result: ${sumNum}/${d}${g>1?` simplified to ${sumNum/g}/${d/g}`:''}` }
+      };
+    } else {
+      const d1 = rnd(2, 5); const d2 = rnd(2, 5);
+      if (d1 === d2) return this.add_fractions();
+      const n1 = rnd(1, d1 - 1); const n2 = rnd(1, d2 - 1);
+      const lcd = (d1 * d2) / gcd(d1, d2);
+      const top = (n1 * (lcd/d1)) + (n2 * (lcd/d2));
+      const g = gcd(top, lcd);
+      const correct = `${top/g}/${lcd/g}`;
+      const wrongs = [`${n1+n2}/${d1+d2}`, `${n1+n2}/${d1*d2}`, `${top+1}/${lcd}`];
+      const mc = buildMC(correct, wrongs);
+      return {
+        questionText: `${n1}/${d1} + ${n2}/${d2} = ?`,
+        ...mc,
+        breakdown: { type: 'text', text: `Find common denominator ${lcd}. ${n1}/${d1} = ${n1*(lcd/d1)}/${lcd}, ${n2}/${d2} = ${n2*(lcd/d2)}/${lcd}. Sum: ${top}/${lcd}${g>1?` = ${top/g}/${lcd/g}`:''}` }
+      };
+    }
+  },
+
+  add_fractions_same_denom() {
+    const d = rnd(3, 10);
+    const a = rnd(1, d - 1); const b = rnd(1, d - a);
+    const sum = a + b;
+    const correct = `${sum}/${d}`;
+    const wrongs = [`${sum}/${d+d}`, `${a+b}/${d*2}`, `${a*b}/${d}`];
+    const mc = buildMC(correct, wrongs);
+    return {
+      questionText: `${a}/${d} + ${b}/${d} = ?`,
+      ...mc,
+      breakdown: { type: 'text', text: `Same bottom number, so add the tops: ${a} + ${b} = ${sum}. The bottom stays the same: ${sum}/${d}` }
+    };
+  },
+
+  multiply_fractions() {
+    const d1 = rnd(2, 8); const n1 = rnd(1, d1 - 1);
+    const d2 = rnd(2, 8); const n2 = rnd(1, d2 - 1);
+    const top = n1 * n2; const bot = d1 * d2;
+    const g = gcd(top, bot);
+    const correct = `${top/g}/${bot/g}`;
+    const wrongs = [`${n1+n2}/${d1+d2}`, `${top}/${bot}`, `${top+1}/${bot}`].filter(w => w !== correct);
+    const mc = buildMC(correct, wrongs);
+    return {
+      questionText: `${n1}/${d1} × ${n2}/${d2} = ?`,
+      ...mc,
+      breakdown: { type: 'text', text: `Multiply tops: ${n1}×${n2}=${top}. Multiply bottoms: ${d1}×${d2}=${bot}. Result: ${top}/${bot}${g>1?` = ${top/g}/${bot/g}`:''}` }
+    };
+  },
+
+  decimals() {
+    const op = ['+','−','×'][rnd(0, 2)];
+    let a, b, correct;
+    if (op === '×') {
+      a = (rnd(2, 9) / 10);
+      b = rnd(2, 9);
+      correct = +(a * b).toFixed(2);
+    } else {
+      a = rnd(10, 99) / 10;
+      b = rnd(10, 99) / 10;
+      if (op === '−' && b > a) [a, b] = [a, b];
+      correct = +((op === '+' ? a + b : a - b).toFixed(2));
+    }
+    const wrongs = uniqueWrongs(correct, [
+      +(correct + 0.1).toFixed(2),
+      +(correct - 0.1).toFixed(2),
+      +(correct * 10).toFixed(2),
+      +(correct / 10).toFixed(2)
+    ]);
+    const mc = buildMC(correct, wrongs);
+    return {
+      questionText: `${a} ${op} ${b} = ?`,
+      ...mc,
+      breakdown: { type: 'text', text: `${a} ${op} ${b} = ${correct}. Line up decimal points carefully!` }
+    };
+  },
+
+  percent() {
+    const pct = [10, 20, 25, 50, 75][rnd(0, 4)];
+    const num = rnd(2, 20) * 10;
+    const correct = (pct / 100) * num;
+    const wrongs = uniqueWrongs(correct, [
+      pct, num,
+      correct + 10, correct - 10,
+      correct * 2
+    ]);
+    const mc = buildMC(correct, wrongs);
+    return {
+      questionText: `What is ${pct}% of ${num}?`,
+      ...mc,
+      breakdown: { type: 'text', text: `${pct}% means ${pct}/100 = ${pct/100}. ${pct/100} × ${num} = ${correct}` }
+    };
+  },
+
+  integers() {
+    const ops = ['+','−','×'];
+    const op = ops[rnd(0, 2)];
+    let a, b, correct;
+    if (op === '×') {
+      a = rnd(-9, 9); b = rnd(-9, 9);
+      while (a === 0 || b === 0) { a = rnd(-9, 9); b = rnd(-9, 9); }
+      correct = a * b;
+    } else if (op === '+') {
+      a = rnd(-15, 15); b = rnd(-15, 15);
+      correct = a + b;
+    } else {
+      a = rnd(-15, 15); b = rnd(-15, 15);
+      correct = a - b;
+    }
+    const wrongs = uniqueWrongs(correct, [-correct, correct + 1, correct - 1, correct + 2, correct - 2]);
+    const mc = buildMC(correct, wrongs);
+    const aDisp = a < 0 ? `(${a})` : a;
+    const bDisp = b < 0 ? `(${b})` : b;
+    return {
+      questionText: `${aDisp} ${op} ${bDisp} = ?`,
+      ...mc,
+      breakdown: { type: 'text', text: `${aDisp} ${op} ${bDisp} = ${correct}. Watch the signs!` }
+    };
+  },
+
+  compare_fractions() {
+    const halves = [{n:1,d:2,v:0.5},{n:1,d:3,v:0.333},{n:2,d:3,v:0.667},{n:1,d:4,v:0.25},{n:3,d:4,v:0.75},{n:1,d:5,v:0.2},{n:2,d:5,v:0.4},{n:3,d:5,v:0.6}];
+    const a = halves[rnd(0, halves.length - 1)];
+    let b;
+    do { b = halves[rnd(0, halves.length - 1)]; } while (b.v === a.v);
+    const correct = a.v > b.v ? `${a.n}/${a.d}` : `${b.n}/${b.d}`;
+    const wrongs = [`${a.n}/${a.d}` === correct ? `${b.n}/${b.d}` : `${a.n}/${a.d}`, 'They\'re equal', `${a.n+b.n}/${a.d+b.d}`];
+    const mc = buildMC(correct, wrongs);
+    return {
+      questionText: `Which is bigger: ${a.n}/${a.d} or ${b.n}/${b.d}?`,
+      ...mc,
+      breakdown: { type: 'text', text: `${a.n}/${a.d} ≈ ${a.v.toFixed(2)} and ${b.n}/${b.d} ≈ ${b.v.toFixed(2)}. So ${correct} is bigger.` }
+    };
+  }
+};
+
+function generateQuestion(skill, recentSignatures) {
+  let q, attempts = 0;
+  do {
+    const gen = GENERATORS[skill.generator.type];
+    if (!gen) { console.error('No generator for', skill.generator.type); return null; }
+    q = gen(skill.generator);
+    attempts++;
+  } while (recentSignatures.includes(q.questionText) && attempts < 20);
+  return q;
+}
+
+// ═══ PRACTICE SESSION ═══════════════════════════════════════════════════════
 function beginSession(skill) {
-  G.session = { skill, qIndex:0, correct:0, attempt:0, answered:false, correctAnswer:null, explanation:null };
+  session = {
+    kid: G.cur, skillId: skill.id,
+    qIndex: 0, correct: 0, attempt: 0, answered: false,
+    coinsEarned: 0, recentQs: [],
+    currentQ: null,
+    streak: 0,  // in-session right streak
+    wrongStreak: 0,
+    difficulty: 'normal'  // normal / easy / hard
+  };
+  document.getElementById('practice').className = `screen active ${G.cur}`;
   document.getElementById('prac-skill-label').textContent = `${skill.icon} ${skill.name}`;
   updateProg();
+  renderQ();
   showScreen('practice');
-  loadQ();
 }
 
 function updateProg() {
-  const qi = G.session.qIndex;
-  document.getElementById('prac-count').textContent = `${qi} / ${TOTAL_QS}`;
-  document.getElementById('prog-fill').style.width = `${(qi/TOTAL_QS)*100}%`;
-  document.getElementById('q-num').textContent = qi+1;
+  document.getElementById('q-counter').textContent = `${session.qIndex} / ${TOTAL_QS}`;
+  document.getElementById('prog-fill').style.width = `${(session.qIndex / TOTAL_QS) * 100}%`;
+  document.getElementById('q-num').textContent = session.qIndex + 1;
+  document.getElementById('session-coins').textContent = session.coinsEarned;
 }
 
-function resetDots() { [0,1].forEach(i=>{ const d=document.getElementById(`adot-${i}`); d.className='attempt-dot'; }); }
-function markDot(i, type) { document.getElementById(`adot-${i}`).classList.add(type==='wrong'?'used':'revealed-dot'); }
+function resetDots() {
+  document.getElementById('dot-0').className = 'dot';
+  document.getElementById('dot-1').className = 'dot';
+}
 
-async function loadQ() {
-  G.session.attempt = 0; G.session.answered = false;
-  document.getElementById('q-text').textContent = 'Generating question…';
-  document.getElementById('q-text').classList.add('loading');
-  document.getElementById('opts-grid').innerHTML = '';
+function renderQ() {
+  session.attempt = 0; session.answered = false;
   document.getElementById('fb-box').className = 'fb-box';
   document.getElementById('try-again-btn').className = 'try-again-btn';
   document.getElementById('next-btn').className = 'next-btn';
   resetDots();
 
-  const { skill } = G.session;
-  const m = getMastery(G.cur, skill.id);
-  const diff = m<30?'easy':m<65?'medium':'hard';
-
-  const prompt = `You are a math tutor. The student is practicing: "${skill.name}".
-Skill instructions: ${skill.prompt}
-Difficulty level: ${diff}
-
-Generate ONE math problem. Return ONLY valid JSON, no markdown:
-{"question":"problem text here","type":"multiple_choice","options":["A) value","B) value","C) value","D) value"],"correct":"A","explanation":"The answer is X because..."}
-
-Critical rules:
-- Follow the skill instructions exactly for number ranges and problem type
-- Exactly 4 options labeled A) B) C) D)
-- Only one correct answer; correct = just the letter
-- Wrong options should be plausible common mistakes
-- Explanation must state the correct answer value clearly`;
-
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json', 'x-api-key':G.apiKey, 'anthropic-version':'2023-06-01', 'anthropic-dangerous-direct-browser-access':'true' },
-      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:350, messages:[{role:'user',content:prompt}] })
-    });
-    if (!resp.ok) throw new Error((await resp.json()).error?.message||'API error');
-    const data = await resp.json();
-    const q = JSON.parse(data.content[0].text.trim().replace(/```json|```/g,'').trim());
-    G.session.correctAnswer = q.correct;
-    G.session.explanation = q.explanation;
-    document.getElementById('q-text').textContent = q.question;
-    document.getElementById('q-text').classList.remove('loading');
-    const grid = document.getElementById('opts-grid');
-    q.options.forEach(opt => {
-      const letter = opt.charAt(0);
-      const btn = document.createElement('button');
-      btn.className = 'opt'; btn.textContent = opt; btn.dataset.letter = letter;
-      btn.onclick = () => pickOpt(letter, btn);
-      grid.appendChild(btn);
-    });
-  } catch(e) {
-    document.getElementById('q-text').textContent = '⚠️ Error loading question. Check API key & internet, then tap Skip.';
-    document.getElementById('q-text').classList.remove('loading');
-    document.getElementById('opts-grid').innerHTML = '';
-    const nb = document.getElementById('next-btn'); nb.textContent='↺ Skip'; nb.classList.add('show');
+  const skill = SKILLS[G.cur].find(s => s.id === session.skillId);
+  if (!session.currentQ) {
+    session.currentQ = generateQuestion(skill, session.recentQs);
   }
+  saveSession();
+  const q = session.currentQ;
+
+  document.getElementById('q-text').textContent = q.questionText;
+  document.getElementById('q-text').className = q.questionText.length > 25 ? 'q-text text-q' : 'q-text';
+
+  const grid = document.getElementById('opts-grid');
+  grid.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.textContent = opt.label;
+    btn.dataset.letter = opt.letter;
+    btn.onclick = () => pickOpt(opt.letter, btn);
+    grid.appendChild(btn);
+  });
 }
 
 function pickOpt(letter, btn) {
-  if (G.session.answered) return;
-  if (btn.disabled) return;
-  const isCorrect = letter === G.session.correctAnswer;
-  if (isCorrect) { doCorrect(btn); }
-  else { doWrong(btn); }
+  if (session.answered || btn.disabled) return;
+  if (letter === session.currentQ.correctLetter) {
+    onCorrect(btn);
+  } else {
+    onWrong(btn);
+  }
 }
 
-function doCorrect(btn) {
-  G.session.answered = true; G.session.correct++;
+function onCorrect(btn) {
+  session.answered = true;
+  session.correct++;
+  session.streak++; session.wrongStreak = 0;
+  // Coins: 10 first try, 5 second try
+  const coinsGained = session.attempt === 0 ? COINS_FIRST_TRY : COINS_SECOND_TRY;
+  session.coinsEarned += coinsGained;
+  // Streak bonus
+  if (session.streak === 5) { session.coinsEarned += 10; showToast('🔥 5 in a row! +10 bonus'); }
+  if (session.streak === 10) { session.coinsEarned += 25; showToast('⚡ 10 in a row! +25 bonus'); }
+
   btn.classList.add('correct');
   document.querySelectorAll('.opt').forEach(b => b.disabled = true);
   document.getElementById('q-card').classList.add('bounce');
   setTimeout(() => document.getElementById('q-card').classList.remove('bounce'), 400);
+  floatCoin(coinsGained);
+
   const fb = document.getElementById('fb-box');
   fb.className = 'fb-box fb-correct show';
-  fb.innerHTML = `✅ <strong>Correct!</strong> ${G.session.explanation||''}`;
+  fb.innerHTML = `<div class="fb-title">✅ Nailed it!</div>${renderBreakdown(session.currentQ.breakdown, true)}`;
+
   const nb = document.getElementById('next-btn');
-  nb.textContent = G.session.qIndex+1>=TOTAL_QS ? 'See Results 🏁' : 'Next Question →';
+  nb.textContent = session.qIndex + 1 >= TOTAL_QS ? 'See Results 🏁' : 'Next Question →';
   nb.classList.add('show');
+  updateProg();
 }
 
-function doWrong(btn) {
-  const att = G.session.attempt;
-  markDot(att, 'wrong');
+function onWrong(btn) {
+  document.getElementById(`dot-${session.attempt}`).classList.add('used');
   btn.classList.add('wrong-ans');
   btn.disabled = true;
   document.getElementById('q-card').classList.add('shake');
   setTimeout(() => document.getElementById('q-card').classList.remove('shake'), 450);
-  G.session.attempt++;
+  session.attempt++;
 
-  if (G.session.attempt < MAX_ATTEMPTS) {
-    // Still has one more attempt
+  if (session.attempt < MAX_ATTEMPTS) {
     const fb = document.getElementById('fb-box');
     fb.className = 'fb-box fb-wrong show';
-    fb.innerHTML = `❌ <strong>Not quite.</strong> One more try!`;
+    fb.innerHTML = `<div class="fb-title">❌ Not quite</div>One more try — you got this.`;
     document.getElementById('try-again-btn').className = 'try-again-btn show';
   } else {
-    // Out of attempts — reveal
-    G.session.answered = true;
+    session.answered = true;
+    session.streak = 0; session.wrongStreak++;
+    document.getElementById(`dot-1`).classList.add('revealed');
     document.querySelectorAll('.opt').forEach(b => {
       b.disabled = true;
-      if (b.dataset.letter === G.session.correctAnswer) b.classList.add('revealed-correct');
+      if (b.dataset.letter === session.currentQ.correctLetter) b.classList.add('revealed-correct');
     });
-    markDot(1, 'revealed');
     const fb = document.getElementById('fb-box');
     fb.className = 'fb-box fb-revealed show';
-    fb.innerHTML = `💡 <strong>Answer revealed.</strong> ${G.session.explanation||''}`;
+    fb.innerHTML = `<div class="fb-title">💡 Here's how it works</div>${renderBreakdown(session.currentQ.breakdown, false)}`;
     document.getElementById('try-again-btn').className = 'try-again-btn';
     const nb = document.getElementById('next-btn');
-    nb.textContent = G.session.qIndex+1>=TOTAL_QS ? 'See Results 🏁' : 'Next Question →';
+    nb.textContent = session.qIndex + 1 >= TOTAL_QS ? 'See Results 🏁' : 'Next Question →';
     nb.classList.add('show');
   }
 }
@@ -566,77 +1302,224 @@ function doWrong(btn) {
 function tryAgain() {
   document.getElementById('fb-box').className = 'fb-box';
   document.getElementById('try-again-btn').className = 'try-again-btn';
-  // Re-enable non-disabled (non-wrong) options
-  document.querySelectorAll('.opt').forEach(b => { if (!b.disabled) b.classList.remove('wrong-ans'); });
 }
 
 function nextQ() {
-  G.session.qIndex++;
+  // Add to recent
+  if (session.currentQ) session.recentQs.push(session.currentQ.questionText);
+  if (session.recentQs.length > 10) session.recentQs.shift();
+  session.currentQ = null;
+  session.qIndex++;
   updateProg();
-  if (G.session.qIndex >= TOTAL_QS) { finishSession(); } else { loadQ(); }
-}
-
-function confirmBack() {
-  if (G.session.qIndex > 0) { if (confirm("Leave? Progress won't be saved.")) showScreen('dashboard'); }
-  else { showScreen('dashboard'); }
-}
-
-// ── RESULTS ───────────────────────────────────────────────────────────────────
-function finishSession() {
-  const { correct, skill } = G.session;
-  const sid = G.cur; const s = G.students[sid];
-  const pct = Math.round((correct/TOTAL_QS)*100);
-
-  if (!s.skills[skill.id]) s.skills[skill.id] = {mastery:0,attempts:0};
-  const oldM = s.skills[skill.id].mastery;
-  const delta = pct>=90?20:pct>=70?10:pct>=50?3:-8;
-  s.skills[skill.id].mastery = Math.max(0, Math.min(100, oldM+delta));
-  s.skills[skill.id].attempts = (s.skills[skill.id].attempts||0)+1;
-  s.total = (s.total||0)+TOTAL_QS;
-
-  const today = new Date().toDateString();
-  if (s.lastDate !== today) {
-    const yesterday = new Date(Date.now()-86400000).toDateString();
-    s.streak = s.lastDate===yesterday ? s.streak+1 : 1;
-    s.lastDate = today;
+  if (session.qIndex >= TOTAL_QS) {
+    finishSession();
+  } else {
+    renderQ();
   }
+}
+
+function confirmExit() {
+  if (session && session.qIndex > 0) {
+    if (confirm('Leave practice? Your progress will be saved so you can resume later.')) {
+      saveSession();
+      showScreen('dashboard');
+      showDash(G.cur);
+    }
+  } else {
+    session = null;
+    saveSession();
+    showScreen('dashboard');
+    showDash(G.cur);
+  }
+}
+
+// ═══ VISUAL BREAKDOWN ═══════════════════════════════════════════════════════
+function renderBreakdown(bd, brief) {
+  if (!bd) return '';
+  if (bd.type === 'sub-columns') {
+    return renderSubColumns(bd, brief);
+  }
+  if (bd.type === 'add-columns') {
+    return renderAddColumns(bd, brief);
+  }
+  if (bd.type === 'mult') {
+    return `<div class="breakdown"><div class="breakdown-title">Why it works</div><div class="bd-explain">${bd.a} × ${bd.b} means ${bd.a} added together ${bd.b} times = <strong>${bd.result.toLocaleString()}</strong></div></div>`;
+  }
+  if (bd.type === 'div') {
+    const explain = bd.remainder === 0
+      ? `${bd.dividend.toLocaleString()} ÷ ${bd.divisor} asks how many groups of ${bd.divisor} fit in ${bd.dividend.toLocaleString()}. Answer: <strong>${bd.quotient}</strong>`
+      : `${bd.dividend.toLocaleString()} ÷ ${bd.divisor}: ${bd.quotient} groups of ${bd.divisor} = ${bd.quotient * bd.divisor}, with ${bd.remainder} left over. Answer: <strong>${bd.quotient} R${bd.remainder}</strong>`;
+    return `<div class="breakdown"><div class="breakdown-title">Why it works</div><div class="bd-explain">${explain}</div></div>`;
+  }
+  if (bd.type === 'text') {
+    return `<div class="breakdown"><div class="breakdown-title">Why it works</div><div class="bd-explain">${bd.text}</div></div>`;
+  }
+  return '';
+}
+
+function renderSubColumns(bd, brief) {
+  // Visual column subtraction with borrow markers
+  const aStr = bd.a.toString();
+  const bStr = bd.b.toString().padStart(aStr.length, '0');
+  const rStr = bd.result.toString().padStart(aStr.length, '0');
+  const len = aStr.length;
+
+  // Compute borrows
+  const aDigits = aStr.split('').map(Number);
+  const bDigits = bStr.split('').map(Number);
+  const finalATop = [...aDigits];  // what each column actually has after borrowing
+  const borrowFrom = new Array(len).fill(false);  // did we borrow from this column?
+
+  for (let i = len - 1; i >= 0; i--) {
+    if (finalATop[i] < bDigits[i]) {
+      // Borrow from left
+      let j = i - 1;
+      while (j >= 0 && finalATop[j] === 0) { finalATop[j] = 9; borrowFrom[j] = true; j--; }
+      if (j >= 0) { finalATop[j]--; borrowFrom[j] = true; finalATop[i] += 10; }
+    }
+  }
+  const hasBorrow = borrowFrom.some(b => b);
+
+  let cols = '';
+  for (let i = 0; i < len; i++) {
+    const wasBorrowed = borrowFrom[i];
+    const topCell = wasBorrowed
+      ? `<div class="bd-cell sm">${finalATop[i]}</div><div class="bd-cell strike">${aDigits[i]}</div>`
+      : `<div class="bd-cell sm">&nbsp;</div><div class="bd-cell">${aDigits[i]}</div>`;
+    cols += `<div class="bd-col">${topCell}<div class="bd-cell">${bDigits[i]}</div><div class="bd-line"></div><div class="bd-cell bd-result">${rStr[i]}</div></div>`;
+  }
+
+  const explain = hasBorrow
+    ? `When the bottom digit is bigger, <strong>borrow 1</strong> from the next column. The orange numbers show the borrows.`
+    : `Subtract each column from right to left.`;
+
+  return `<div class="breakdown"><div class="breakdown-title">Step by step</div><div class="bd-columns">${cols}</div><div class="bd-explain">${explain} Answer: <strong>${bd.result.toLocaleString()}</strong></div></div>`;
+}
+
+function renderAddColumns(bd, brief) {
+  const aStr = bd.a.toString();
+  const bStr = bd.b.toString();
+  const len = Math.max(aStr.length, bStr.length);
+  const aP = aStr.padStart(len, ' '); const bP = bStr.padStart(len, ' ');
+  const rStr = bd.result.toString().padStart(len, ' ');
+
+  let cols = '';
+  for (let i = 0; i < len; i++) {
+    cols += `<div class="bd-col"><div class="bd-cell">${aP[i].trim() || '&nbsp;'}</div><div class="bd-cell">${bP[i].trim() || '&nbsp;'}</div><div class="bd-line"></div><div class="bd-cell bd-result">${rStr[i] === ' ' ? '&nbsp;' : rStr[i]}</div></div>`;
+  }
+  // If result has more digits than max, show carry
+  const resultStr = bd.result.toString();
+  if (resultStr.length > len) {
+    cols = `<div class="bd-col"><div class="bd-cell">&nbsp;</div><div class="bd-cell">&nbsp;</div><div class="bd-line"></div><div class="bd-cell bd-result">${resultStr[0]}</div></div>` + cols;
+  }
+  return `<div class="breakdown"><div class="breakdown-title">Step by step</div><div class="bd-columns">${cols}</div><div class="bd-explain">Add each column from right to left, carrying when needed. Answer: <strong>${bd.result.toLocaleString()}</strong></div></div>`;
+}
+
+// ═══ FINISH & RESULTS ═══════════════════════════════════════════════════════
+function finishSession() {
+  const { correct, skillId, kid: k, coinsEarned } = session;
+  const kid = G.kids[k];
+  const list = SKILLS[k];
+  const skill = list.find(s => s.id === skillId);
+  const pct = Math.round((correct / TOTAL_QS) * 100);
+
+  // Record session pct in rolling window
+  if (!kid.skills[skillId]) kid.skills[skillId] = { recent: [], attempts: 0 };
+  const sk = kid.skills[skillId];
+  const oldM = getMastery(k, skillId);
+  sk.recent.push(pct);
+  if (sk.recent.length > MASTERY_WINDOW) sk.recent.shift();
+  sk.attempts = (sk.attempts || 0) + 1;
+  const newM = getMastery(k, skillId);
+
+  // Coins (regular session + perfect bonus)
+  let totalCoins = coinsEarned;
+  if (correct === TOTAL_QS) totalCoins += COINS_PERFECT_BONUS;
+  kid.coins = (kid.coins || 0) + totalCoins;
+  kid.totalQ = (kid.totalQ || 0) + TOTAL_QS;
+
+  // Streak
+  const today = new Date().toDateString();
+  if (kid.lastDate !== today) {
+    const yest = new Date(Date.now() - 86400000).toDateString();
+    kid.streak = kid.lastDate === yest ? kid.streak + 1 : 1;
+    kid.lastDate = today;
+  }
+
+  // Clear session
+  session = null;
+  saveSession();
   save(); refreshHome();
 
-  const newM = s.skills[skill.id].mastery;
-  const icon = pct===100?'🏆':pct>=80?'⭐':pct>=60?'👍':'💪';
-  const msg = pct===100?"Perfect score! You nailed every one.":pct>=80?"Strong work! Almost mastered.":pct>=60?"Good effort — keep practicing!":"Keep going. Every session builds you up.";
-
+  // Render results
+  document.getElementById('results').className = `screen active ${k}`;
+  const icon = correct === TOTAL_QS ? '🏆' : pct >= 80 ? '⭐' : pct >= 60 ? '👍' : '💪';
+  const msg = correct === TOTAL_QS ? 'Perfect score! 🎉'
+    : pct >= 80 ? 'Strong work — almost mastered.'
+    : pct >= 60 ? 'Good effort. Keep going.'
+    : 'Every session builds you up.';
   document.getElementById('res-icon').textContent = icon;
   document.getElementById('res-score').textContent = `${correct}/${TOTAL_QS}`;
   document.getElementById('res-msg').textContent = msg;
+  document.getElementById('res-coins').innerHTML = `🪙 +${totalCoins} coins${correct === TOTAL_QS ? ' (perfect bonus!)' : ''}`;
   document.getElementById('mc-skill').textContent = `${skill.icon} ${skill.name}`;
   document.getElementById('mc-fill').style.width = '0%';
   document.getElementById('mc-pct').textContent = `${newM}% mastery`;
 
-  const skills = getSkills(sid);
-  const idx = skills.findIndex(sk=>sk.id===skill.id);
-  const next = skills[idx+1];
-  const noteEl = document.getElementById('next-skill-note');
-  if (newM>=80 && oldM<80 && next) { noteEl.textContent=`🔓 "${next.name}" just unlocked!`; noteEl.classList.add('show'); }
-  else if (newM>=80 && !next) { noteEl.textContent=`🎓 All skills mastered! Full track complete.`; noteEl.classList.add('show'); }
-  else { noteEl.className='next-skill-note'; }
-
+  const idx = list.findIndex(s => s.id === skillId);
+  const next = list[idx + 1];
+  const noteEl = document.getElementById('note-box');
+  if (newM >= 80 && oldM < 80 && next) {
+    noteEl.textContent = `🔓 "${next.name}" just unlocked!`;
+    noteEl.classList.add('show');
+  } else if (newM >= 80 && !next) {
+    noteEl.textContent = `🎓 Full track complete. You did it!`;
+    noteEl.classList.add('show');
+  } else if (sk.recent.length < MASTERY_MIN_SESSIONS) {
+    noteEl.textContent = `Keep going — ${MASTERY_MIN_SESSIONS - sk.recent.length} more session${MASTERY_MIN_SESSIONS - sk.recent.length > 1 ? 's' : ''} until you can fully master this skill.`;
+    noteEl.classList.add('show');
+  } else {
+    noteEl.classList.remove('show');
+  }
   showScreen('results');
-  setTimeout(()=>{ document.getElementById('mc-fill').style.width=`${newM}%`; }, 300);
+  setTimeout(() => { document.getElementById('mc-fill').style.width = `${newM}%`; }, 300);
 
-  if (newM>=80 && oldM<80) showToast(`🎉 "${skill.name}" MASTERED!`);
-  else if (pct===100) showToast(`🔥 Perfect! ${s.streak}-day streak!`);
+  if (newM >= 80 && oldM < 80) showToast(`🎉 ${skill.name} MASTERED!`);
+  else if (correct === TOTAL_QS) showToast(`🔥 Perfect! Streak: ${kid.streak}`);
 }
 
-function practiceAgain() { beginSession(G.session.skill); }
+function practiceAgain() {
+  const list = SKILLS[G.cur];
+  // Find the most recent skill they practiced — use last session's skillId if we still have it
+  const recentSkill = list[curSkillIdx(G.cur)];  // just go to current
+  beginSession(recentSkill);
+}
+
 function goDash() { showDash(G.cur); }
 
+// ═══ UI HELPERS ═════════════════════════════════════════════════════════════
 function showToast(msg) {
-  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 3200);
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-load();
+function floatCoin(amount) {
+  const el = document.createElement('div');
+  el.className = 'coin-float';
+  el.textContent = `🪙 +${amount}`;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1000);
+}
+
+// ═══ BOOT ═══════════════════════════════════════════════════════════════════
+async function boot() {
+  load();
+  await loadSkills();
+  refreshHome();
+}
+boot();
 </script>
 </body>
 </html>
