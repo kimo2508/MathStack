@@ -4,1220 +4,639 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>MathStack</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f0f4ff;
+  --bg: #f5f7ff;
   --card: #ffffff;
   --border: #e2e8f0;
-  --shadow: 0 4px 24px rgba(80,100,180,0.10);
-  --shadow-lg: 0 8px 40px rgba(80,100,180,0.16);
+  --shadow: 0 4px 20px rgba(80,100,200,0.10);
+  --shadow-lg: 0 8px 40px rgba(80,100,200,0.16);
   --blue: #4f6ef7;
-  --blue-light: #eef1fe;
   --blue-dark: #3a56d4;
+  --blue-light: #eef1fe;
   --green: #22c55e;
   --green-light: #dcfce7;
   --red: #ef4444;
   --red-light: #fee2e2;
+  --orange: #f97316;
+  --orange-light: #fff0e6;
   --yellow: #f59e0b;
   --yellow-light: #fef3c7;
-  --purple: #a855f7;
-  --purple-light: #f3e8ff;
-  --text: #1e2235;
+  --text: #1a1f35;
   --muted: #64748b;
   --radius: 20px;
   --radius-sm: 12px;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { background: var(--bg); font-family: 'Nunito Sans', sans-serif; color: var(--text); min-height: 100vh; }
+.screen { display: none; min-height: 100vh; padding: 1.5rem; flex-direction: column; }
+.screen.active { display: flex; }
 
-body {
-  background: var(--bg);
-  font-family: 'Nunito Sans', sans-serif;
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* ── SCREENS ── */
-.screen { display: none; min-height: 100vh; padding: 1.5rem; }
-.screen.active { display: flex; flex-direction: column; }
-
-/* ── HOME SCREEN ── */
+/* HOME */
 #home {
-  background: linear-gradient(160deg, #4f6ef7 0%, #6c5ce7 100%);
-  color: white;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2.5rem 1.5rem;
+  background: linear-gradient(155deg, #2d3a8c 0%, #4f6ef7 55%, #7c3aed 100%);
+  color: white; align-items: center; justify-content: center;
+  gap: 2.5rem; padding: 2.5rem 1.5rem;
 }
+.app-brand { text-align: center; }
+.app-brand .logo-icon { font-size: 3.5rem; display: block; margin-bottom: 0.4rem; }
+.app-brand h1 { font-family: 'Nunito', sans-serif; font-size: 3rem; font-weight: 900; letter-spacing: -2px; line-height: 1; }
+.app-brand .tagline { font-size: 0.9rem; opacity: 0.7; margin-top: 0.4rem; }
+.who-label { font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6; text-align: center; margin-bottom: 0.75rem; }
+.student-list { display: flex; flex-direction: column; gap: 0.9rem; width: 100%; max-width: 360px; }
+.s-card { background: rgba(255,255,255,0.13); border: 1.5px solid rgba(255,255,255,0.22); border-radius: var(--radius); padding: 1rem 1.2rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; transition: all 0.18s; backdrop-filter: blur(12px); }
+.s-card:active { transform: scale(0.97); background: rgba(255,255,255,0.22); }
+.s-card .av { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; background: rgba(255,255,255,0.15); }
+.s-card .si { flex: 1; }
+.s-card .si .sname { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.1rem; }
+.s-card .si .sgrade { font-size: 0.78rem; opacity: 0.7; margin-top: 0.1rem; }
+.s-card .sstreak { text-align: right; }
+.s-card .sstreak strong { font-family: 'Nunito', sans-serif; font-size: 1.3rem; font-weight: 900; display: block; }
+.s-card .sstreak span { font-size: 0.7rem; opacity: 0.65; }
+.home-note { font-size: 0.75rem; opacity: 0.6; text-align: center; max-width: 300px; line-height: 1.5; }
 
-.app-logo {
-  text-align: center;
-}
-
-.app-logo .icon {
-  font-size: 4rem;
-  display: block;
-  margin-bottom: 0.5rem;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
-}
-
-.app-logo h1 {
-  font-family: 'Nunito', sans-serif;
-  font-size: 2.8rem;
-  font-weight: 900;
-  letter-spacing: -1px;
-}
-
-.app-logo p {
-  font-size: 1rem;
-  opacity: 0.8;
-  margin-top: 0.3rem;
-}
-
-.who-section { width: 100%; max-width: 380px; }
-.who-section h2 {
-  font-family: 'Nunito', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  opacity: 0.7;
-  text-align: center;
-  margin-bottom: 1rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.student-cards { display: flex; flex-direction: column; gap: 0.85rem; }
-
-.student-card {
-  background: rgba(255,255,255,0.15);
-  border: 2px solid rgba(255,255,255,0.25);
-  border-radius: var(--radius);
-  padding: 1.1rem 1.3rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  backdrop-filter: blur(10px);
-}
-
-.student-card:active { transform: scale(0.97); background: rgba(255,255,255,0.25); }
-
-.student-card .avatar {
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.6rem;
-  flex-shrink: 0;
-}
-
-.student-card.girl .avatar { background: rgba(255,182,193,0.3); }
-.student-card.boy .avatar { background: rgba(135,206,235,0.3); }
-
-.student-card .info { flex: 1; }
-.student-card .info .name {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 800;
-  font-size: 1.15rem;
-}
-.student-card .info .grade {
-  font-size: 0.82rem;
-  opacity: 0.75;
-  margin-top: 0.1rem;
-}
-
-.student-card .streak {
-  text-align: right;
-  font-size: 0.8rem;
-  opacity: 0.8;
-}
-.student-card .streak strong { font-size: 1.2rem; font-weight: 800; display: block; }
-
-.api-notice {
-  background: rgba(255,255,255,0.12);
-  border-radius: var(--radius-sm);
-  padding: 0.75rem 1rem;
-  font-size: 0.78rem;
-  opacity: 0.75;
-  text-align: center;
-  max-width: 380px;
-  width: 100%;
-  line-height: 1.5;
-}
-
-/* ── SETUP SCREEN ── */
-#setup {
-  background: var(--bg);
-  gap: 1.5rem;
-}
-
-.setup-header { text-align: center; padding: 1rem 0; }
-.setup-header h2 { font-family: 'Nunito', sans-serif; font-size: 1.6rem; font-weight: 900; }
-.setup-header p { color: var(--muted); font-size: 0.9rem; margin-top: 0.3rem; }
-
-.setup-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 1.25rem;
-  box-shadow: var(--shadow);
-}
-
-.setup-card label {
-  display: block;
-  font-weight: 700;
-  font-size: 0.85rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 0.6rem;
-}
-
-.setup-card input, .setup-card textarea {
-  width: 100%;
-  border: 2px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 0.85rem 1rem;
-  font-size: 1rem;
-  font-family: 'Nunito Sans', sans-serif;
-  color: var(--text);
-  background: var(--bg);
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.setup-card input:focus, .setup-card textarea:focus { border-color: var(--blue); }
-.setup-card textarea { resize: vertical; min-height: 60px; font-size: 0.9rem; }
-
-.btn {
-  display: block;
-  width: 100%;
-  border: none;
-  border-radius: var(--radius);
-  padding: 1rem;
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--blue), #6c5ce7);
-  color: white;
-  box-shadow: 0 4px 16px rgba(79,110,247,0.4);
-}
-
+/* SETUP */
+#setup { gap: 1.25rem; background: var(--bg); }
+.setup-top { text-align: center; padding: 0.5rem 0 0.25rem; }
+.setup-top h2 { font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: 900; }
+.setup-top p { color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem; }
+.field-card { background: var(--card); border-radius: var(--radius); padding: 1.1rem 1.2rem; box-shadow: var(--shadow); }
+.field-card label { display: block; font-weight: 700; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.5rem; }
+.field-card input { width: 100%; border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 0.8rem 1rem; font-size: 1rem; font-family: 'Nunito Sans', sans-serif; color: var(--text); background: var(--bg); outline: none; transition: border-color 0.2s; }
+.field-card input:focus { border-color: var(--blue); }
+.field-note { font-size: 0.72rem; color: var(--muted); margin-top: 0.45rem; line-height: 1.45; }
+.btn { display: block; width: 100%; border: none; border-radius: var(--radius); padding: 1rem; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; cursor: pointer; transition: all 0.18s; text-align: center; }
+.btn-primary { background: linear-gradient(135deg, var(--blue), #7c3aed); color: white; box-shadow: 0 4px 16px rgba(79,110,247,0.38); }
 .btn-primary:active { transform: scale(0.98); box-shadow: none; }
+.btn-ghost { background: transparent; color: var(--muted); font-size: 0.88rem; padding: 0.65rem; }
 
-.btn-ghost {
-  background: transparent;
-  color: var(--muted);
-  font-size: 0.9rem;
-  padding: 0.7rem;
-}
-
-/* ── DASHBOARD SCREEN ── */
+/* DASHBOARD */
 #dashboard { background: var(--bg); gap: 0; }
+.dash-hero { background: linear-gradient(135deg, #2d3a8c 0%, #4f6ef7 60%, #7c3aed 100%); color: white; padding: 1.4rem 1.5rem 2.8rem; border-radius: 0 0 2rem 2rem; margin: -1.5rem -1.5rem 0; }
+.dh-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.1rem; }
+.dh-back { background: rgba(255,255,255,0.18); border: none; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; color: white; flex-shrink: 0; }
+.dh-name-wrap { flex: 1; }
+.dh-name { font-family: 'Nunito', sans-serif; font-size: 1.35rem; font-weight: 900; }
+.dh-sub { font-size: 0.78rem; opacity: 0.7; }
+.dash-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; }
+.dstat { background: rgba(255,255,255,0.14); border-radius: var(--radius-sm); padding: 0.55rem 0.4rem; text-align: center; backdrop-filter: blur(8px); }
+.dstat .dv { font-family: 'Nunito', sans-serif; font-size: 1.35rem; font-weight: 900; }
+.dstat .dl { font-size: 0.63rem; opacity: 0.72; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.1rem; }
+.dash-body { padding: 0.75rem 1.5rem 2rem; flex: 1; display: flex; flex-direction: column; gap: 1rem; margin-top: -1.3rem; }
+.sec-title { font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; }
+.skill-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.sk-row { background: var(--card); border-radius: var(--radius-sm); padding: 0.85rem 1rem; display: flex; align-items: center; gap: 0.85rem; box-shadow: 0 2px 8px rgba(80,100,200,0.07); cursor: pointer; transition: all 0.18s; border: 2px solid transparent; }
+.sk-row:active:not(.sk-locked) { transform: scale(0.98); }
+.sk-row.sk-locked { opacity: 0.45; cursor: not-allowed; }
+.sk-row.sk-mastered { border-color: var(--green); }
+.sk-row.sk-current { border-color: var(--blue); background: var(--blue-light); }
+.sk-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+.sk-mastered .sk-icon { background: var(--green-light); }
+.sk-current .sk-icon { background: white; }
+.sk-locked .sk-icon { background: #f1f5f9; }
+.sk-new .sk-icon { background: var(--yellow-light); }
+.sk-info { flex: 1; min-width: 0; }
+.sk-info .skn { font-weight: 700; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sk-info .skd { font-size: 0.73rem; color: var(--muted); margin-top: 0.1rem; }
+.sk-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; flex-shrink: 0; }
+.sk-pct { font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 800; }
+.sk-mastered .sk-pct { color: var(--green); }
+.sk-current .sk-pct { color: var(--blue); }
+.sk-new .sk-pct { color: var(--yellow); }
+.sk-locked .sk-pct { color: var(--muted); }
+.mini-bar { width: 52px; height: 5px; background: var(--border); border-radius: 10px; overflow: hidden; }
+.mini-bar-fill { height: 100%; border-radius: 10px; background: var(--blue); transition: width 0.5s; }
+.sk-mastered .mini-bar-fill { background: var(--green); }
+.go-btn { width: 100%; border: none; background: linear-gradient(135deg, var(--blue), #7c3aed); color: white; border-radius: var(--radius); padding: 1.05rem; font-family: 'Nunito', sans-serif; font-size: 1.05rem; font-weight: 900; cursor: pointer; box-shadow: 0 4px 18px rgba(79,110,247,0.35); transition: all 0.18s; }
+.go-btn:active { transform: scale(0.98); box-shadow: none; }
 
-.dash-header {
-  background: linear-gradient(135deg, var(--blue), #6c5ce7);
-  color: white;
-  padding: 1.5rem 1.5rem 3rem;
-  border-radius: 0 0 2rem 2rem;
-  margin: -1.5rem -1.5rem 0;
-}
-
-.dash-header-top {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 1.2rem;
-}
-
-.dash-header-top .back-btn {
-  background: rgba(255,255,255,0.2);
-  border: none; border-radius: 50%;
-  width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: 1.1rem; color: white;
-}
-
-.dash-greeting { flex: 1; padding-left: 0.75rem; }
-.dash-greeting .name { font-family: 'Nunito', sans-serif; font-size: 1.4rem; font-weight: 900; }
-.dash-greeting .sub { font-size: 0.82rem; opacity: 0.75; }
-
-.dash-stats {
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  gap: 0.75rem; margin-top: 0.5rem;
-}
-
-.stat-pill {
-  background: rgba(255,255,255,0.15);
-  border-radius: var(--radius-sm);
-  padding: 0.6rem 0.5rem;
-  text-align: center;
-  backdrop-filter: blur(8px);
-}
-
-.stat-pill .val { font-family: 'Nunito', sans-serif; font-size: 1.4rem; font-weight: 900; }
-.stat-pill .lbl { font-size: 0.68rem; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.05em; }
-
-.dash-body { padding: 1rem 1.5rem 2rem; flex: 1; display: flex; flex-direction: column; gap: 1.2rem; margin-top: -1.5rem; }
-
-.section-title {
-  font-family: 'Nunito', sans-serif;
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 0.6rem;
-}
-
-.skill-grid { display: flex; flex-direction: column; gap: 0.6rem; }
-
-.skill-card {
-  background: var(--card);
-  border-radius: var(--radius-sm);
-  padding: 0.9rem 1rem;
-  display: flex; align-items: center; gap: 0.9rem;
-  box-shadow: 0 2px 8px rgba(80,100,180,0.07);
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 2px solid transparent;
-}
-
-.skill-card:active { transform: scale(0.98); }
-.skill-card.locked { opacity: 0.5; cursor: not-allowed; }
-.skill-card.mastered { border-color: var(--green); }
-.skill-card.in-progress { border-color: var(--blue); }
-
-.skill-icon {
-  width: 44px; height: 44px; border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem; flex-shrink: 0;
-}
-
-.skill-card.mastered .skill-icon { background: var(--green-light); }
-.skill-card.in-progress .skill-icon { background: var(--blue-light); }
-.skill-card.locked .skill-icon { background: #f1f5f9; }
-.skill-card.new .skill-icon { background: var(--yellow-light); }
-
-.skill-info { flex: 1; }
-.skill-info .skill-name { font-weight: 700; font-size: 0.95rem; }
-.skill-info .skill-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
-
-.skill-badge {
-  font-family: 'Nunito', sans-serif;
-  font-size: 0.72rem; font-weight: 800;
-  padding: 0.25rem 0.6rem;
-  border-radius: 20px;
-  flex-shrink: 0;
-}
-
-.badge-mastered { background: var(--green-light); color: var(--green); }
-.badge-progress { background: var(--blue-light); color: var(--blue); }
-.badge-new { background: var(--yellow-light); color: var(--yellow); }
-.badge-locked { background: #f1f5f9; color: var(--muted); }
-
-.start-practice-btn {
-  background: linear-gradient(135deg, var(--blue), #6c5ce7);
-  color: white; border: none;
-  border-radius: var(--radius);
-  padding: 1.1rem;
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.1rem; font-weight: 800;
-  width: 100%; cursor: pointer;
-  box-shadow: 0 4px 20px rgba(79,110,247,0.35);
-  transition: all 0.2s;
-}
-
-.start-practice-btn:active { transform: scale(0.98); box-shadow: none; }
-
-/* ── PRACTICE SCREEN ── */
-#practice { background: var(--bg); }
-
-.practice-header {
-  display: flex; align-items: center; gap: 0.75rem;
-  margin-bottom: 1.25rem;
-}
-
-.practice-header .back-btn {
-  background: var(--card); border: none;
-  border-radius: 50%; width: 42px; height: 42px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; cursor: pointer;
-  box-shadow: 0 2px 8px rgba(80,100,180,0.1);
-  color: var(--text);
-}
-
-.practice-header .skill-label {
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.1rem; font-weight: 800;
-}
-
-.practice-header .progress-info {
-  margin-left: auto;
-  font-size: 0.82rem; color: var(--muted); font-weight: 600;
-}
-
-.progress-bar-wrap {
-  background: var(--border); border-radius: 10px; height: 8px;
-  margin-bottom: 1.5rem; overflow: hidden;
-}
-
-.progress-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--blue), #6c5ce7);
-  border-radius: 10px;
-  transition: width 0.5s ease;
-}
-
-.question-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-  margin-bottom: 1.25rem;
-  min-height: 140px;
-  display: flex; flex-direction: column; justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.question-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: linear-gradient(90deg, var(--blue), #6c5ce7);
-}
-
-.question-label {
-  font-size: 0.72rem; font-weight: 700; color: var(--blue);
-  text-transform: uppercase; letter-spacing: 0.08em;
-  margin-bottom: 0.75rem;
-}
-
-.question-text {
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.5rem; font-weight: 900;
-  line-height: 1.4; color: var(--text);
-}
-
-.question-text.loading {
-  color: var(--muted); font-size: 1rem; font-weight: 400;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-
-.options-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 0.75rem; margin-bottom: 1rem;
-}
-
-.option-btn {
-  background: var(--card); border: 2.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 1rem 0.75rem;
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.1rem; font-weight: 800;
-  color: var(--text); cursor: pointer;
-  transition: all 0.2s; text-align: center;
-  box-shadow: 0 2px 8px rgba(80,100,180,0.07);
-}
-
-.option-btn:active:not(:disabled) { transform: scale(0.96); }
-.option-btn.selected { border-color: var(--blue); background: var(--blue-light); color: var(--blue); }
-.option-btn.correct { border-color: var(--green); background: var(--green-light); color: #16a34a; }
-.option-btn.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
-.option-btn:disabled { cursor: default; }
-
-.open-answer-wrap {
-  display: flex; gap: 0.75rem; align-items: stretch;
-  margin-bottom: 1rem;
-}
-
-.open-answer-wrap input {
-  flex: 1; border: 2.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 1rem; font-size: 1.4rem;
-  font-family: 'Nunito', sans-serif; font-weight: 800;
-  text-align: center; color: var(--text);
-  background: var(--card); outline: none;
-  transition: border-color 0.2s;
-}
-
-.open-answer-wrap input:focus { border-color: var(--blue); }
-.open-answer-wrap input.correct { border-color: var(--green); background: var(--green-light); color: #16a34a; }
-.open-answer-wrap input.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
-
-.submit-btn {
-  background: linear-gradient(135deg, var(--blue), #6c5ce7);
-  color: white; border: none; border-radius: var(--radius-sm);
-  padding: 1rem 1.5rem; font-family: 'Nunito', sans-serif;
-  font-size: 1rem; font-weight: 800; cursor: pointer;
-  transition: all 0.2s;
-}
-
-.submit-btn:active { transform: scale(0.97); }
-.submit-btn:disabled { opacity: 0.5; cursor: default; }
-
-.feedback-box {
-  border-radius: var(--radius-sm);
-  padding: 1rem 1.1rem;
-  font-size: 0.9rem; line-height: 1.5;
-  margin-bottom: 1rem;
-  display: none;
-}
-
-.feedback-box.show { display: block; }
-.feedback-box.correct-fb { background: var(--green-light); color: #15803d; border: 1.5px solid rgba(34,197,94,0.3); }
-.feedback-box.wrong-fb { background: var(--red-light); color: #b91c1c; border: 1.5px solid rgba(239,68,68,0.3); }
-
-.next-btn {
-  width: 100%; border: none;
-  background: linear-gradient(135deg, var(--blue), #6c5ce7);
-  color: white; border-radius: var(--radius);
-  padding: 1.1rem; font-family: 'Nunito', sans-serif;
-  font-size: 1.05rem; font-weight: 800; cursor: pointer;
-  box-shadow: 0 4px 16px rgba(79,110,247,0.3);
-  transition: all 0.2s; display: none;
-}
-
+/* PRACTICE */
+#practice { background: var(--bg); gap: 0.9rem; }
+.prac-header { display: flex; align-items: center; gap: 0.7rem; }
+.prac-back { background: var(--card); border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer; box-shadow: 0 2px 8px rgba(80,100,200,0.1); color: var(--text); flex-shrink: 0; }
+.prac-skill { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; }
+.prac-count { margin-left: auto; font-size: 0.8rem; color: var(--muted); font-weight: 700; white-space: nowrap; }
+.prog-wrap { background: var(--border); border-radius: 10px; height: 7px; overflow: hidden; }
+.prog-fill { height: 100%; background: linear-gradient(90deg, var(--blue), #7c3aed); border-radius: 10px; transition: width 0.4s ease; }
+.attempt-row { display: flex; gap: 0.35rem; align-items: center; }
+.attempt-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); transition: background 0.2s; }
+.attempt-dot.used { background: var(--red); }
+.attempt-dot.revealed-dot { background: var(--orange); }
+.attempt-label { font-size: 0.72rem; color: var(--muted); margin-left: 0.25rem; }
+.q-card { background: var(--card); border-radius: var(--radius); padding: 1.4rem 1.3rem; box-shadow: var(--shadow); position: relative; overflow: hidden; min-height: 120px; display: flex; flex-direction: column; justify-content: center; }
+.q-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), #7c3aed); }
+.q-tag { font-size: 0.68rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem; }
+.q-text { font-family: 'Nunito', sans-serif; font-size: 1.55rem; font-weight: 900; line-height: 1.35; color: var(--text); }
+.q-text.loading { color: var(--muted); font-size: 0.95rem; font-weight: 400; animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+.shake { animation: shake 0.4s ease; }
+@keyframes bounce-in { 0%{transform:scale(0.95)} 60%{transform:scale(1.03)} 100%{transform:scale(1)} }
+.bounce { animation: bounce-in 0.3s ease; }
+.opts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+.opt { background: var(--card); border: 2.5px solid var(--border); border-radius: var(--radius-sm); padding: 0.95rem 0.7rem; font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--text); cursor: pointer; transition: all 0.15s; text-align: center; box-shadow: 0 2px 6px rgba(80,100,200,0.06); }
+.opt:active:not(:disabled) { transform: scale(0.96); }
+.opt.correct { border-color: var(--green); background: var(--green-light); color: #15803d; }
+.opt.wrong-ans { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.opt.revealed-correct { border-color: var(--orange); background: var(--orange-light); color: var(--orange); }
+.opt:disabled { cursor: default; }
+.fb-box { border-radius: var(--radius-sm); padding: 0.9rem 1rem; font-size: 0.88rem; line-height: 1.5; display: none; }
+.fb-box.show { display: block; }
+.fb-correct { background: var(--green-light); color: #15803d; border: 1.5px solid rgba(34,197,94,0.3); }
+.fb-wrong { background: var(--red-light); color: #b91c1c; border: 1.5px solid rgba(239,68,68,0.3); }
+.fb-revealed { background: var(--orange-light); color: #c2410c; border: 1.5px solid rgba(249,115,22,0.3); }
+.try-again-btn { width: 100%; border: 2.5px solid var(--red); background: white; color: var(--red); border-radius: var(--radius); padding: 1rem; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; cursor: pointer; transition: all 0.15s; display: none; }
+.try-again-btn.show { display: block; }
+.try-again-btn:active { background: var(--red-light); }
+.next-btn { width: 100%; border: none; background: linear-gradient(135deg, var(--blue), #7c3aed); color: white; border-radius: var(--radius); padding: 1.05rem; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 14px rgba(79,110,247,0.28); transition: all 0.15s; display: none; }
 .next-btn.show { display: block; }
 .next-btn:active { transform: scale(0.98); }
 
-/* ── RESULTS SCREEN ── */
-#results {
-  background: var(--bg);
-  align-items: center; justify-content: center;
-  text-align: center; gap: 1.5rem; padding: 2rem;
-}
+/* RESULTS */
+#results { background: var(--bg); align-items: center; justify-content: center; text-align: center; gap: 1.3rem; padding: 2.5rem 1.5rem; }
+.res-icon { font-size: 4.5rem; }
+.res-score { font-family: 'Nunito', sans-serif; font-size: 3.8rem; font-weight: 900; background: linear-gradient(135deg, var(--blue), #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+.res-of { font-size: 1rem; color: var(--muted); margin-top: -0.3rem; }
+.res-msg { font-family: 'Nunito', sans-serif; font-size: 1.2rem; font-weight: 800; max-width: 280px; }
+.mastery-card { background: var(--card); border-radius: var(--radius); padding: 1.1rem 1.4rem; width: 100%; max-width: 340px; box-shadow: var(--shadow); }
+.mc-label { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.6rem; }
+.mc-skillname { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; margin-bottom: 0.5rem; }
+.mc-bar { background: var(--border); border-radius: 8px; height: 11px; overflow: hidden; margin-bottom: 0.35rem; }
+.mc-fill { height: 100%; border-radius: 8px; background: linear-gradient(90deg, var(--blue), #7c3aed); transition: width 1s ease; }
+.mc-pct { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.88rem; color: var(--blue); text-align: right; }
+.next-skill-note { background: var(--blue-light); border-radius: var(--radius-sm); padding: 0.75rem 1rem; width: 100%; max-width: 340px; font-size: 0.83rem; color: var(--blue-dark); font-weight: 600; display: none; }
+.next-skill-note.show { display: block; }
+.res-btns { display: flex; flex-direction: column; gap: 0.65rem; width: 100%; max-width: 340px; }
 
-.result-icon { font-size: 5rem; }
-.result-score {
-  font-family: 'Nunito', sans-serif;
-  font-size: 4rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--blue), #6c5ce7);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-
-.result-label { font-size: 1.1rem; color: var(--muted); margin-top: -0.5rem; }
-.result-message {
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.3rem; font-weight: 800;
-  max-width: 300px;
-}
-
-.mastery-update {
-  background: var(--card); border-radius: var(--radius);
-  padding: 1.1rem 1.5rem; width: 100%; max-width: 340px;
-  box-shadow: var(--shadow);
-}
-
-.mastery-update .mu-label { font-size: 0.75rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
-.mastery-update .mu-bar { background: var(--border); border-radius: 8px; height: 12px; overflow: hidden; margin: 0.4rem 0; }
-.mastery-update .mu-fill { height: 100%; border-radius: 8px; transition: width 1s ease; background: linear-gradient(90deg, var(--blue), #6c5ce7); }
-.mastery-update .mu-pct { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem; color: var(--blue); text-align: right; }
-
-.results-btns { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; max-width: 340px; }
-
-/* ── API KEY MODAL ── */
-.modal-overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
-  z-index: 100; align-items: flex-end; justify-content: center;
-  padding: 1rem;
-}
-
-.modal-overlay.show { display: flex; }
-
-.modal-box {
-  background: var(--card); border-radius: var(--radius);
-  padding: 1.75rem; width: 100%; max-width: 440px;
-  box-shadow: var(--shadow-lg);
-}
-
-.modal-box h3 { font-family: 'Nunito', sans-serif; font-size: 1.3rem; font-weight: 900; margin-bottom: 0.5rem; }
-.modal-box p { font-size: 0.87rem; color: var(--muted); margin-bottom: 1.2rem; line-height: 1.5; }
-
-.modal-box input {
-  width: 100%; border: 2px solid var(--border);
-  border-radius: var(--radius-sm); padding: 0.9rem 1rem;
-  font-size: 0.9rem; font-family: 'Nunito Sans', sans-serif;
-  margin-bottom: 1rem; background: var(--bg);
-  outline: none; color: var(--text);
-  transition: border-color 0.2s;
-}
-
-.modal-box input:focus { border-color: var(--blue); }
-
-/* ── STREAK TOAST ── */
-.toast {
-  position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%) translateY(-80px);
-  background: #1e2235; color: white; border-radius: var(--radius);
-  padding: 0.75rem 1.4rem; font-family: 'Nunito', sans-serif;
-  font-weight: 800; font-size: 0.95rem; z-index: 200;
-  box-shadow: var(--shadow-lg); transition: transform 0.4s ease;
-  white-space: nowrap;
-}
-
+/* TOAST */
+.toast { position: fixed; top: 1.2rem; left: 50%; transform: translateX(-50%) translateY(-90px); background: #1a1f35; color: white; border-radius: var(--radius); padding: 0.7rem 1.3rem; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem; z-index: 300; box-shadow: var(--shadow-lg); transition: transform 0.35s ease; white-space: nowrap; pointer-events: none; }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
-/* ── Responsive ── */
 @media (min-width: 500px) {
-  .screen { padding: 2rem; max-width: 480px; margin: 0 auto; }
-  .dash-header { margin: -2rem -2rem 0; }
-  .dash-body { padding: 1.2rem 2rem 2rem; }
+  .screen { padding: 2rem; max-width: 460px; margin: 0 auto; }
+  .dash-hero { margin: -2rem -2rem 0; }
+  .dash-body { padding: 0.9rem 2rem 2rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- HOME SCREEN -->
+<!-- HOME -->
 <div id="home" class="screen active">
-  <div class="app-logo">
-    <span class="icon">🧮</span>
+  <div class="app-brand">
+    <span class="logo-icon">🧮</span>
     <h1>MathStack</h1>
-    <p>Master math. One problem at a time.</p>
+    <p class="tagline">Master math. One problem at a time.</p>
   </div>
-
-  <div class="who-section">
-    <h2>Who's practicing?</h2>
-    <div class="student-cards">
-      <div class="student-card girl" onclick="selectStudent('student1')">
-        <div class="avatar">👧</div>
-        <div class="info">
-          <div class="name" id="s1-name">Loading...</div>
-          <div class="grade" id="s1-grade">7th Grade · Math</div>
-        </div>
-        <div class="streak">
-          <strong id="s1-streak">0🔥</strong>
-          day streak
-        </div>
+  <div class="student-list">
+    <p class="who-label">Who's practicing today?</p>
+    <div class="s-card" onclick="selectStudent('s1')">
+      <div class="av">👧</div>
+      <div class="si">
+        <div class="sname" id="s1-name">—</div>
+        <div class="sgrade" id="s1-grade">7th Grade · Math</div>
       </div>
-      <div class="student-card boy" onclick="selectStudent('student2')">
-        <div class="avatar">👦</div>
-        <div class="info">
-          <div class="name" id="s2-name">Loading...</div>
-          <div class="grade" id="s2-grade">5th Grade · Math</div>
-        </div>
-        <div class="streak">
-          <strong id="s2-streak">0🔥</strong>
-          day streak
-        </div>
+      <div class="sstreak"><strong id="s1-streak">0🔥</strong><span>day streak</span></div>
+    </div>
+    <div class="s-card" onclick="selectStudent('s2')">
+      <div class="av">👦</div>
+      <div class="si">
+        <div class="sname" id="s2-name">—</div>
+        <div class="sgrade" id="s2-grade">5th Grade · Math</div>
       </div>
+      <div class="sstreak"><strong id="s2-streak">0🔥</strong><span>day streak</span></div>
     </div>
   </div>
-
-  <div class="api-notice">
-    ⚙️ First time? Tap a student to set up their profile &amp; enter your Anthropic API key.
-  </div>
+  <p class="home-note">⚙️ First time? Tap a name to set up the profile and enter your API key.</p>
 </div>
 
-<!-- SETUP SCREEN -->
+<!-- SETUP -->
 <div id="setup" class="screen">
-  <div class="setup-header">
-    <h2>👋 Setup Profile</h2>
-    <p id="setup-subtitle">Let's personalize the experience</p>
+  <div class="setup-top">
+    <h2 id="setup-title">Set Up Profile</h2>
+    <p id="setup-sub">Personalize the experience</p>
   </div>
-
-  <div class="setup-card">
+  <div class="field-card">
     <label>Student Name</label>
-    <input type="text" id="setup-name" placeholder="e.g. Ella" maxlength="20">
+    <input type="text" id="f-name" placeholder="e.g. Ella" maxlength="20">
   </div>
-
-  <div class="setup-card">
+  <div class="field-card">
     <label>Grade Level</label>
-    <input type="number" id="setup-grade" placeholder="e.g. 7" min="4" max="9">
+    <input type="number" id="f-grade" placeholder="e.g. 7" min="1" max="9">
   </div>
-
-  <div class="setup-card">
+  <div class="field-card">
     <label>Anthropic API Key</label>
-    <input type="password" id="setup-apikey" placeholder="sk-ant-...">
-    <p style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem;line-height:1.4">
-      Get one at console.anthropic.com. Stored locally on this device only.
-    </p>
+    <input type="password" id="f-key" placeholder="sk-ant-...">
+    <p class="field-note">Get yours at console.anthropic.com → API Keys. Stored only on this device.</p>
   </div>
-
   <button class="btn btn-primary" onclick="saveSetup()">Save & Start →</button>
   <button class="btn btn-ghost" onclick="showScreen('home')">← Back</button>
 </div>
 
-<!-- DASHBOARD SCREEN -->
+<!-- DASHBOARD -->
 <div id="dashboard" class="screen">
-  <div class="dash-header">
-    <div class="dash-header-top">
-      <button class="back-btn" onclick="showScreen('home')">←</button>
-      <div class="dash-greeting">
-        <div class="name" id="dash-name">Name</div>
-        <div class="sub" id="dash-sub">Grade · Math</div>
+  <div class="dash-hero">
+    <div class="dh-row">
+      <button class="dh-back" onclick="showScreen('home')">←</button>
+      <div class="dh-name-wrap">
+        <div class="dh-name" id="dh-name">—</div>
+        <div class="dh-sub" id="dh-sub">—</div>
       </div>
-      <div style="width:40px"></div>
+      <div style="width:38px"></div>
     </div>
     <div class="dash-stats">
-      <div class="stat-pill">
-        <div class="val" id="stat-streak">0🔥</div>
-        <div class="lbl">Streak</div>
-      </div>
-      <div class="stat-pill">
-        <div class="val" id="stat-mastered">0</div>
-        <div class="lbl">Mastered</div>
-      </div>
-      <div class="stat-pill">
-        <div class="val" id="stat-total">0</div>
-        <div class="lbl">Problems</div>
-      </div>
+      <div class="dstat"><div class="dv" id="ds-streak">0🔥</div><div class="dl">Streak</div></div>
+      <div class="dstat"><div class="dv" id="ds-mastered">0</div><div class="dl">Mastered</div></div>
+      <div class="dstat"><div class="dv" id="ds-total">0</div><div class="dl">Problems</div></div>
     </div>
   </div>
-
   <div class="dash-body">
     <div>
-      <div class="section-title">📚 Math Skills</div>
-      <div class="skill-grid" id="skill-grid"></div>
+      <div class="sec-title">📚 Skill Progression</div>
+      <div class="skill-list" id="skill-list"></div>
     </div>
-
-    <button class="start-practice-btn" onclick="startPractice()">
-      ⚡ Start Today's Practice
-    </button>
+    <button class="go-btn" onclick="startRecommended()">⚡ Start Today's Practice</button>
   </div>
 </div>
 
-<!-- PRACTICE SCREEN -->
+<!-- PRACTICE -->
 <div id="practice" class="screen">
-  <div class="practice-header">
-    <button class="back-btn" onclick="confirmBack()">←</button>
-    <div class="skill-label" id="practice-skill-label">Skill Name</div>
-    <div class="progress-info" id="practice-progress">0 / 5</div>
+  <div class="prac-header">
+    <button class="prac-back" onclick="confirmBack()">←</button>
+    <div class="prac-skill" id="prac-skill-label">Skill</div>
+    <div class="prac-count" id="prac-count">0 / 30</div>
   </div>
-
-  <div class="progress-bar-wrap">
-    <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+  <div class="prog-wrap">
+    <div class="prog-fill" id="prog-fill" style="width:0%"></div>
   </div>
-
-  <div class="question-card" id="question-card">
-    <div class="question-label">QUESTION</div>
-    <div class="question-text" id="question-text">Loading question...</div>
+  <div class="attempt-row" id="attempt-row">
+    <div class="attempt-dot" id="adot-0"></div>
+    <div class="attempt-dot" id="adot-1"></div>
+    <span class="attempt-label">attempts this question</span>
   </div>
-
-  <div class="options-grid" id="options-grid"></div>
-  <div class="open-answer-wrap" id="open-answer-wrap" style="display:none">
-    <input type="number" id="open-answer" placeholder="?" inputmode="decimal">
-    <button class="submit-btn" id="submit-btn" onclick="submitOpenAnswer()">✓</button>
+  <div class="q-card" id="q-card">
+    <div class="q-tag">QUESTION <span id="q-num">1</span></div>
+    <div class="q-text loading" id="q-text">Generating question…</div>
   </div>
-
-  <div class="feedback-box" id="feedback-box"></div>
-  <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question →</button>
+  <div class="opts-grid" id="opts-grid"></div>
+  <div class="fb-box" id="fb-box"></div>
+  <button class="try-again-btn" id="try-again-btn" onclick="tryAgain()">↺ Try Again</button>
+  <button class="next-btn" id="next-btn" onclick="nextQ()">Next Question →</button>
 </div>
 
-<!-- RESULTS SCREEN -->
+<!-- RESULTS -->
 <div id="results" class="screen">
-  <div class="result-icon" id="result-icon">🏆</div>
-  <div class="result-score" id="result-score">10/10</div>
-  <div class="result-label">correct answers</div>
-  <div class="result-message" id="result-message">Great work!</div>
-
-  <div class="mastery-update" id="mastery-card">
-    <div class="mu-label" id="mu-skill-name">Skill</div>
-    <div class="mu-bar"><div class="mu-fill" id="mu-bar-fill" style="width:0%"></div></div>
-    <div class="mu-pct" id="mu-pct">0% mastery</div>
+  <div class="res-icon" id="res-icon">🏆</div>
+  <div class="res-score" id="res-score">—</div>
+  <div class="res-of" id="res-of">correct out of 30</div>
+  <div class="res-msg" id="res-msg">Great work!</div>
+  <div class="mastery-card">
+    <div class="mc-label">Mastery Update</div>
+    <div class="mc-skillname" id="mc-skill">—</div>
+    <div class="mc-bar"><div class="mc-fill" id="mc-fill" style="width:0%"></div></div>
+    <div class="mc-pct" id="mc-pct">0%</div>
   </div>
-
-  <div class="results-btns">
+  <div class="next-skill-note" id="next-skill-note"></div>
+  <div class="res-btns">
     <button class="btn btn-primary" onclick="practiceAgain()">Practice Again 🔁</button>
-    <button class="btn" style="background:var(--card);color:var(--text);box-shadow:var(--shadow)" onclick="showScreen('dashboard')">Back to Dashboard</button>
+    <button class="btn" style="background:var(--card);color:var(--text);box-shadow:var(--shadow)" onclick="goDash()">Back to Skills</button>
   </div>
 </div>
 
-<!-- API KEY MODAL (quick fix) -->
-<div class="modal-overlay" id="apikey-modal">
-  <div class="modal-box">
-    <h3>🔑 API Key Needed</h3>
-    <p>Enter your Anthropic API key to generate questions. It stays on your device.</p>
-    <input type="password" id="modal-apikey" placeholder="sk-ant-...">
-    <button class="btn btn-primary" onclick="saveApiKey()">Save & Continue</button>
-  </div>
-</div>
-
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ───────────────────────────────────────────────
-// STATE
-// ───────────────────────────────────────────────
-const DEFAULT_STUDENTS = {
-  student1: { name: "Ella", grade: 7, emoji: "👧", cardClass: "girl" },
-  student2: { name: "Buddy", grade: 5, emoji: "👦", cardClass: "boy" }
-};
+// ── SKILL TREES ────────────────────────────────────────────────────────────
 
-const SKILL_TREE = {
-  5: [
-    { id: "mult", name: "Multiplication", icon: "✖️", desc: "Times tables & multi-digit" },
-    { id: "div", name: "Division", icon: "➗", desc: "Long division & remainders" },
-    { id: "fractions_intro", name: "Fractions", icon: "½", desc: "Adding & subtracting fractions" },
-    { id: "decimals", name: "Decimals", icon: ".", desc: "Operations with decimals" },
-    { id: "word_problems", name: "Word Problems", icon: "📝", desc: "Real-world math" },
-    { id: "geometry_basic", name: "Geometry", icon: "📐", desc: "Area, perimeter, volume" },
-  ],
-  7: [
-    { id: "integers", name: "Integers", icon: "±", desc: "Negative numbers & operations" },
-    { id: "fractions_adv", name: "Fractions & Ratios", icon: "⅔", desc: "Complex fractions, ratios, rates" },
-    { id: "pre_algebra", name: "Pre-Algebra", icon: "x", desc: "Variables & expressions" },
-    { id: "equations", name: "Equations", icon: "=", desc: "Solving one-step & two-step equations" },
-    { id: "percent", name: "Percent", icon: "%", desc: "Percent, discount, tax, tip" },
-    { id: "geometry_7", name: "Geometry", icon: "📐", desc: "Angles, triangles, circles" },
-  ]
-};
+// S1: 7th grade student working UP from 3-digit subtraction
+const SKILLS_S1 = [
+  { id:'sub3',        name:'3-Digit Subtraction',     icon:'➖', desc:'e.g. 847 − 293, with borrowing',          prompt:'Generate 3-digit subtraction problems with borrowing. Numbers 100-999. Examples: 847-293, 502-178, 634-457.' },
+  { id:'sub4',        name:'4-Digit Subtraction',     icon:'➖', desc:'e.g. 5,043 − 1,867',                       prompt:'4-digit subtraction with borrowing including across zeros. e.g. 5043-1867, 8000-2345.' },
+  { id:'mult_facts',  name:'Multiplication Facts',    icon:'✖️', desc:'Times tables 1–12',                        prompt:'Multiplication facts, times tables 1-12. Single digit × single digit and single × double digit. e.g. 7×8, 6×12, 9×7.' },
+  { id:'mult_2dig',   name:'Multi-Digit Multiply',    icon:'✖️', desc:'e.g. 34 × 27',                             prompt:'Two-digit by two-digit multiplication. e.g. 34×27, 56×43. Show the full problem clearly.' },
+  { id:'div_facts',   name:'Division Facts',          icon:'➗', desc:'Dividing up to 144 ÷ 12',                  prompt:'Basic division facts, divisors 1-12, dividends up to 144. e.g. 72÷8, 132÷11. No remainders.' },
+  { id:'div_long',    name:'Long Division',           icon:'➗', desc:'e.g. 378 ÷ 6, with remainders',            prompt:'Long division with 3-digit dividends and single-digit divisors. May have remainders. e.g. 378÷6, 245÷7.' },
+  { id:'frac_basic',  name:'Fraction Basics',        icon:'½',  desc:'Simplifying & equivalent fractions',       prompt:'Simplifying fractions to lowest terms and identifying equivalent fractions. Grade 5-6 level.' },
+  { id:'frac_add',    name:'Adding Fractions',        icon:'½',  desc:'Like & unlike denominators',               prompt:'Adding and subtracting fractions with like and unlike denominators. Include some mixed numbers.' },
+  { id:'frac_mult',   name:'Multiplying Fractions',   icon:'½',  desc:'Fractions × fractions & whole numbers',    prompt:'Multiplying fractions by fractions and by whole numbers. e.g. 2/3 × 3/4, 5 × 2/3.' },
+  { id:'decimals',    name:'Decimals',                icon:'.0', desc:'Add, subtract, multiply decimals',         prompt:'Operations with decimals: addition, subtraction, and multiplication. Up to 3 decimal places.' },
+  { id:'percent',     name:'Percents',                icon:'%',  desc:'%, discounts, tax, tip',                   prompt:'Percent problems: finding percent of a number, percent discount, sales tax, tip. Real-world contexts.' },
+  { id:'integers',    name:'Integers',                icon:'±',  desc:'Negative numbers & operations',            prompt:'Operations with positive and negative integers: addition, subtraction, multiplication. e.g. -5 + 8, 3 × (-4).' },
+];
 
-let state = {
-  currentStudent: null,
-  students: {},
-  apiKey: null,
-  // practice session
-  session: {
-    skill: null,
-    questions: [],
-    current: 0,
-    correct: 0,
-    answered: false,
-    correctAnswer: null
-  }
-};
+// S2: 5th grade student — starting at subtraction to 20, progressing up
+const SKILLS_S2 = [
+  { id:'sub_20',      name:'Subtraction to 20',       icon:'➖', desc:'e.g. 20 − 7, 18 − 9, 12 − 5',            prompt:'Subtraction where the top number is between 10-20 and bottom number is a single digit 1-9. ONLY use numbers in this range. Examples exactly like: 20-7, 18-9, 15-8, 12-6, 17-9, 14-5, 13-7. No other number ranges.' },
+  { id:'sub_2dig',    name:'2-Digit Subtraction',     icon:'➖', desc:'e.g. 45 − 23, 67 − 38',                   prompt:'Two-digit subtraction. Mix of no-borrowing (e.g. 47-23) and simple borrowing (e.g. 52-37). Keep it beginner friendly.' },
+  { id:'sub_borrow',  name:'Subtraction w/ Borrowing',icon:'➖', desc:'e.g. 73 − 48, 82 − 35',                   prompt:'Two-digit subtraction requiring borrowing in ones and tens place. e.g. 73-48, 82-35, 61-27.' },
+  { id:'add_2dig',    name:'Addition to 100',         icon:'➕', desc:'e.g. 47 + 38, with carrying',              prompt:'Two-digit addition with and without carrying. e.g. 47+38, 56+27, 34+45.' },
+  { id:'sub_3dig',    name:'3-Digit Subtraction',     icon:'➖', desc:'e.g. 342 − 178',                           prompt:'3-digit subtraction with borrowing. e.g. 342-178, 500-234, 721-359. Keep numbers under 1000.' },
+  { id:'mult_facts',  name:'Multiplication Basics',   icon:'✖️', desc:'Times tables 1–10',                        prompt:'Basic multiplication facts, times tables 1-10. Keep it very clear and beginner friendly. e.g. 3×4, 7×6, 5×8.' },
+  { id:'mult_2dig',   name:'Multiply by 2-Digits',    icon:'✖️', desc:'e.g. 24 × 3, 13 × 12',                    prompt:'Multiplication: 2-digit by 1-digit and simple 2-digit by 2-digit. e.g. 24×3, 35×4, 12×11.' },
+  { id:'div_facts',   name:'Division Basics',         icon:'➗', desc:'Dividing up to 100 ÷ 10',                  prompt:'Basic division facts, divisors 1-10, dividends up to 100. No remainders. e.g. 56÷8, 42÷6, 90÷9.' },
+  { id:'frac_intro',  name:'Fraction Intro',          icon:'½',  desc:'What fractions mean, comparing',           prompt:'Introduction to fractions: identifying what fraction is shaded, comparing ½ ⅓ ¼ ⅔. Very beginner-friendly, visual descriptions.' },
+  { id:'frac_add',    name:'Adding Fractions',        icon:'½',  desc:'Same denominator fractions',               prompt:'Adding and subtracting fractions with same denominator only. e.g. 1/4 + 2/4, 3/5 - 1/5. Grade 4-5 level.' },
+];
 
-// ───────────────────────────────────────────────
-// PERSISTENCE
-// ───────────────────────────────────────────────
-function loadState() {
+// ── CONSTANTS ───────────────────────────────────────────────────────────────
+const TOTAL_QS = 30;
+const MAX_ATTEMPTS = 2;
+const DEFAULTS = { s1: { name:'Ella', grade:7, emoji:'👧' }, s2: { name:'Buddy', grade:5, emoji:'👦' } };
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+let G = { apiKey:null, students:{}, cur:null, session:{} };
+
+function getSkills(sid) { return sid === 's1' ? SKILLS_S1 : SKILLS_S2; }
+
+// ── PERSISTENCE ──────────────────────────────────────────────────────────────
+function load() {
   try {
-    const saved = JSON.parse(localStorage.getItem('mathstack_state') || '{}');
-    state.apiKey = saved.apiKey || null;
-    state.students = saved.students || {};
-
-    // Ensure both students exist
-    ['student1','student2'].forEach(sid => {
-      if (!state.students[sid]) {
-        const def = DEFAULT_STUDENTS[sid];
-        state.students[sid] = {
-          name: def.name,
-          grade: def.grade,
-          streak: 0,
-          totalProblems: 0,
-          lastPracticeDate: null,
-          skills: {}
-        };
-      }
+    const d = JSON.parse(localStorage.getItem('mathstack_v2') || '{}');
+    G.apiKey = d.apiKey || null;
+    G.students = d.students || {};
+    ['s1','s2'].forEach(sid => {
+      if (!G.students[sid]) G.students[sid] = { name:DEFAULTS[sid].name, grade:DEFAULTS[sid].grade, streak:0, total:0, lastDate:null, skills:{} };
     });
-  } catch(e) { console.log('Load error', e); }
-  updateHomeScreen();
+  } catch(e) {}
+  refreshHome();
 }
+function save() { localStorage.setItem('mathstack_v2', JSON.stringify({ apiKey:G.apiKey, students:G.students })); }
 
-function saveState() {
-  localStorage.setItem('mathstack_state', JSON.stringify({
-    apiKey: state.apiKey,
-    students: state.students
-  }));
-}
+// ── NAV ───────────────────────────────────────────────────────────────────────
+function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
 
-// ───────────────────────────────────────────────
-// SCREEN NAV
-// ───────────────────────────────────────────────
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-}
-
-// ───────────────────────────────────────────────
-// HOME SCREEN
-// ───────────────────────────────────────────────
-function updateHomeScreen() {
-  ['student1','student2'].forEach((sid, i) => {
-    const s = state.students[sid];
-    const n = i+1;
+// ── HOME ───────────────────────────────────────────────────────────────────────
+function refreshHome() {
+  ['s1','s2'].forEach((sid,i) => {
+    const s = G.students[sid]; const n = i+1;
     document.getElementById(`s${n}-name`).textContent = s.name;
     document.getElementById(`s${n}-grade`).textContent = `${s.grade}th Grade · Math`;
     document.getElementById(`s${n}-streak`).textContent = `${s.streak}🔥`;
   });
 }
+function selectStudent(sid) { G.cur = sid; if (!G.apiKey) { showSetup(sid); return; } showDash(sid); }
 
-function selectStudent(sid) {
-  state.currentStudent = sid;
-  const s = state.students[sid];
-  // check if setup needed (no api key or default name)
-  if (!state.apiKey) {
-    showSetupScreen(sid);
-    return;
-  }
-  showDashboard(sid);
-}
-
-// ───────────────────────────────────────────────
-// SETUP
-// ───────────────────────────────────────────────
-let setupForStudent = null;
-
-function showSetupScreen(sid) {
-  setupForStudent = sid;
-  const s = state.students[sid];
-  document.getElementById('setup-subtitle').textContent =
-    `Setting up for ${DEFAULT_STUDENTS[sid].emoji} ${sid === 'student1' ? '7th' : '5th'} grader`;
-  document.getElementById('setup-name').value = s.name !== DEFAULT_STUDENTS[sid].name ? s.name : '';
-  document.getElementById('setup-grade').value = s.grade;
-  document.getElementById('setup-apikey').value = state.apiKey || '';
+// ── SETUP ─────────────────────────────────────────────────────────────────────
+let _sid = null;
+function showSetup(sid) {
+  _sid = sid; const s = G.students[sid];
+  document.getElementById('setup-title').textContent = `Set Up ${DEFAULTS[sid].emoji} Profile`;
+  document.getElementById('setup-sub').textContent = `Grade ${s.grade} · Math`;
+  document.getElementById('f-name').value = s.name !== DEFAULTS[sid].name ? s.name : '';
+  document.getElementById('f-grade').value = s.grade;
+  document.getElementById('f-key').value = G.apiKey || '';
   showScreen('setup');
 }
-
 function saveSetup() {
-  const name = document.getElementById('setup-name').value.trim();
-  const grade = parseInt(document.getElementById('setup-grade').value);
-  const apiKey = document.getElementById('setup-apikey').value.trim();
-
-  if (!name) { alert('Please enter a name'); return; }
-  if (!grade || grade < 4 || grade > 9) { alert('Enter grade between 4-9'); return; }
-  if (!apiKey || !apiKey.startsWith('sk-')) { alert('Please enter a valid Anthropic API key (starts with sk-)'); return; }
-
-  state.students[setupForStudent].name = name;
-  state.students[setupForStudent].grade = grade;
-  state.apiKey = apiKey;
-  saveState();
-  updateHomeScreen();
-  showDashboard(setupForStudent);
+  const name = document.getElementById('f-name').value.trim();
+  const grade = parseInt(document.getElementById('f-grade').value);
+  const key = document.getElementById('f-key').value.trim();
+  if (!name) { alert('Enter a name'); return; }
+  if (!grade || grade<1||grade>9) { alert('Enter grade 1–9'); return; }
+  if (!key||!key.startsWith('sk-')) { alert('Enter a valid API key starting with sk-'); return; }
+  G.students[_sid].name = name; G.students[_sid].grade = grade; G.apiKey = key;
+  save(); refreshHome(); showDash(_sid);
 }
 
-// ───────────────────────────────────────────────
-// DASHBOARD
-// ───────────────────────────────────────────────
-function showDashboard(sid) {
-  const s = state.students[sid];
-  const grade = s.grade;
-  const skillLevel = grade >= 7 ? 7 : 5;
-  const skills = SKILL_TREE[skillLevel];
+// ── DASHBOARD ─────────────────────────────────────────────────────────────────
+function getMastery(sid, skillId) { return G.students[sid].skills[skillId]?.mastery || 0; }
+function curSkillIdx(sid) { const sk = getSkills(sid); for(let i=0;i<sk.length;i++){if(getMastery(sid,sk[i].id)<80)return i;} return sk.length-1; }
 
-  // Update header
-  document.getElementById('dash-name').textContent = `${DEFAULT_STUDENTS[sid].emoji} ${s.name}`;
-  document.getElementById('dash-sub').textContent = `${grade}th Grade · Math`;
-  document.getElementById('stat-streak').textContent = `${s.streak}🔥`;
+function showDash(sid) {
+  const s = G.students[sid]; const skills = getSkills(sid);
+  document.getElementById('dh-name').textContent = `${DEFAULTS[sid].emoji} ${s.name}`;
+  document.getElementById('dh-sub').textContent = `Grade ${s.grade} · Math`;
+  document.getElementById('ds-streak').textContent = `${s.streak}🔥`;
+  document.getElementById('ds-mastered').textContent = skills.filter(sk=>getMastery(sid,sk.id)>=80).length;
+  document.getElementById('ds-total').textContent = s.total||0;
 
-  // Count mastered
-  const masteredCount = skills.filter(sk => (s.skills[sk.id]?.mastery || 0) >= 80).length;
-  document.getElementById('stat-mastered').textContent = masteredCount;
-  document.getElementById('stat-total').textContent = s.totalProblems || 0;
+  const list = document.getElementById('skill-list'); list.innerHTML = '';
+  skills.forEach((sk, i) => {
+    const m = getMastery(sid, sk.id);
+    const prevOk = i===0 || getMastery(sid,skills[i-1].id)>=40;
+    let cls='sk-new', label='START';
+    if (m>=80) { cls='sk-mastered'; label='✓ Done'; }
+    else if (m>0) { cls='sk-current'; label=`${m}%`; }
+    else if (!prevOk) { cls='sk-locked'; label='🔒'; }
+    else if (i===curSkillIdx(sid)) { cls='sk-current'; label='Current'; }
 
-  // Render skills
-  const grid = document.getElementById('skill-grid');
-  grid.innerHTML = '';
-
-  skills.forEach((skill, i) => {
-    const skillData = s.skills[skill.id] || { mastery: 0, attempts: 0 };
-    const mastery = skillData.mastery || 0;
-    const prev = i === 0 ? true : (s.skills[skills[i-1].id]?.mastery || 0) >= 40;
-
-    let status = 'new';
-    let badge = 'NEW';
-    let badgeClass = 'badge-new';
-    if (mastery >= 80) { status = 'mastered'; badge = '✓ DONE'; badgeClass = 'badge-mastered'; }
-    else if (mastery > 0) { status = 'in-progress'; badge = `${mastery}%`; badgeClass = 'badge-progress'; }
-    else if (!prev) { status = 'locked'; badge = '🔒'; badgeClass = 'badge-locked'; }
-
-    const card = document.createElement('div');
-    card.className = `skill-card ${status}`;
-    card.innerHTML = `
-      <div class="skill-icon">${skill.icon}</div>
-      <div class="skill-info">
-        <div class="skill-name">${skill.name}</div>
-        <div class="skill-sub">${skill.desc}</div>
-      </div>
-      <span class="skill-badge ${badgeClass}">${badge}</span>
-    `;
-
-    if (status !== 'locked') {
-      card.onclick = () => startSkillPractice(skill);
-    }
-
-    grid.appendChild(card);
+    const row = document.createElement('div');
+    row.className = `sk-row ${cls}`;
+    row.innerHTML = `<div class="sk-icon">${sk.icon}</div><div class="sk-info"><div class="skn">${sk.name}</div><div class="skd">${sk.desc}</div></div><div class="sk-right"><div class="sk-pct">${label}</div><div class="mini-bar"><div class="mini-bar-fill" style="width:${m}%"></div></div></div>`;
+    if (cls !== 'sk-locked') row.onclick = () => beginSession(sk);
+    list.appendChild(row);
   });
-
   showScreen('dashboard');
 }
 
-function startPractice() {
-  const sid = state.currentStudent;
-  const s = state.students[sid];
-  const grade = s.grade;
-  const skillLevel = grade >= 7 ? 7 : 5;
-  const skills = SKILL_TREE[skillLevel];
+function startRecommended() { const sk = getSkills(G.cur); beginSession(sk[curSkillIdx(G.cur)]); }
 
-  // Find first skill that isn't mastered
-  let target = skills.find(sk => (s.skills[sk.id]?.mastery || 0) < 80);
-  if (!target) target = skills[0]; // All done, loop
-  startSkillPractice(target);
-}
-
-// ───────────────────────────────────────────────
-// PRACTICE SESSION
-// ───────────────────────────────────────────────
-const QUESTIONS_PER_SESSION = 5;
-
-function startSkillPractice(skill) {
-  state.session = {
-    skill: skill,
-    questions: [],
-    current: 0,
-    correct: 0,
-    answered: false,
-    correctAnswer: null
-  };
-
-  document.getElementById('practice-skill-label').textContent = `${skill.icon} ${skill.name}`;
-  document.getElementById('practice-progress').textContent = `0 / ${QUESTIONS_PER_SESSION}`;
-  document.getElementById('progress-bar').style.width = '0%';
-
+// ── PRACTICE ──────────────────────────────────────────────────────────────────
+function beginSession(skill) {
+  G.session = { skill, qIndex:0, correct:0, attempt:0, answered:false, correctAnswer:null, explanation:null };
+  document.getElementById('prac-skill-label').textContent = `${skill.icon} ${skill.name}`;
+  updateProg();
   showScreen('practice');
-  loadNextQuestion();
+  loadQ();
 }
 
-async function loadNextQuestion() {
-  const { skill, current } = state.session;
-  const sid = state.currentStudent;
-  const s = state.students[sid];
-  const grade = s.grade;
-
-  // Reset UI
-  document.getElementById('question-text').textContent = 'Generating question...';
-  document.getElementById('question-text').classList.add('loading');
-  document.getElementById('options-grid').innerHTML = '';
-  document.getElementById('options-grid').style.display = 'grid';
-  document.getElementById('open-answer-wrap').style.display = 'none';
-  document.getElementById('feedback-box').classList.remove('show');
-  document.getElementById('next-btn').classList.remove('show');
-  state.session.answered = false;
-
-  const mastery = s.skills[skill.id]?.mastery || 0;
-  const difficulty = mastery < 30 ? 'easy' : mastery < 60 ? 'medium' : 'hard';
-
-  const prompt = `You are a math tutor for a ${grade}th grader practicing "${skill.name}".
-
-Generate a math question at ${difficulty} difficulty level.
-Respond ONLY with valid JSON in this exact format (no markdown, no extra text):
-{
-  "question": "The question text here",
-  "type": "multiple_choice",
-  "options": ["A) option1", "B) option2", "C) option3", "D) option4"],
-  "correct": "A",
-  "explanation": "Brief 1-sentence explanation of why this is correct"
+function updateProg() {
+  const qi = G.session.qIndex;
+  document.getElementById('prac-count').textContent = `${qi} / ${TOTAL_QS}`;
+  document.getElementById('prog-fill').style.width = `${(qi/TOTAL_QS)*100}%`;
+  document.getElementById('q-num').textContent = qi+1;
 }
 
-Rules:
-- question should be clear and age-appropriate
-- For multiple choice: provide exactly 4 options labeled A), B), C), D)
-- correct field should be just the letter: A, B, C, or D
-- Make sure only one answer is correct
-- explanation should be encouraging and clear`;
+function resetDots() { [0,1].forEach(i=>{ const d=document.getElementById(`adot-${i}`); d.className='attempt-dot'; }); }
+function markDot(i, type) { document.getElementById(`adot-${i}`).classList.add(type==='wrong'?'used':'revealed-dot'); }
+
+async function loadQ() {
+  G.session.attempt = 0; G.session.answered = false;
+  document.getElementById('q-text').textContent = 'Generating question…';
+  document.getElementById('q-text').classList.add('loading');
+  document.getElementById('opts-grid').innerHTML = '';
+  document.getElementById('fb-box').className = 'fb-box';
+  document.getElementById('try-again-btn').className = 'try-again-btn';
+  document.getElementById('next-btn').className = 'next-btn';
+  resetDots();
+
+  const { skill } = G.session;
+  const m = getMastery(G.cur, skill.id);
+  const diff = m<30?'easy':m<65?'medium':'hard';
+
+  const prompt = `You are a math tutor. The student is practicing: "${skill.name}".
+Skill instructions: ${skill.prompt}
+Difficulty level: ${diff}
+
+Generate ONE math problem. Return ONLY valid JSON, no markdown:
+{"question":"problem text here","type":"multiple_choice","options":["A) value","B) value","C) value","D) value"],"correct":"A","explanation":"The answer is X because..."}
+
+Critical rules:
+- Follow the skill instructions exactly for number ranges and problem type
+- Exactly 4 options labeled A) B) C) D)
+- Only one correct answer; correct = just the letter
+- Wrong options should be plausible common mistakes
+- Explanation must state the correct answer value clearly`;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': state.apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 400,
-        messages: [{ role: 'user', content: prompt }]
-      })
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'x-api-key':G.apiKey, 'anthropic-version':'2023-06-01', 'anthropic-dangerous-direct-browser-access':'true' },
+      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:350, messages:[{role:'user',content:prompt}] })
     });
-
-    if (!response.ok) {
-      const err = await response.json();
-      throw new Error(err.error?.message || 'API error');
-    }
-
-    const data = await response.json();
-    const raw = data.content[0].text.trim();
-
-    // Parse JSON (strip any stray markdown)
-    const clean = raw.replace(/```json|```/g, '').trim();
-    const q = JSON.parse(clean);
-
-    state.session.correctAnswer = q.correct;
-    state.session.explanation = q.explanation;
-
-    document.getElementById('question-text').textContent = q.question;
-    document.getElementById('question-text').classList.remove('loading');
-
-    // Render options
-    const grid = document.getElementById('options-grid');
-    grid.innerHTML = '';
+    if (!resp.ok) throw new Error((await resp.json()).error?.message||'API error');
+    const data = await resp.json();
+    const q = JSON.parse(data.content[0].text.trim().replace(/```json|```/g,'').trim());
+    G.session.correctAnswer = q.correct;
+    G.session.explanation = q.explanation;
+    document.getElementById('q-text').textContent = q.question;
+    document.getElementById('q-text').classList.remove('loading');
+    const grid = document.getElementById('opts-grid');
     q.options.forEach(opt => {
       const letter = opt.charAt(0);
       const btn = document.createElement('button');
-      btn.className = 'option-btn';
-      btn.textContent = opt;
-      btn.dataset.letter = letter;
-      btn.onclick = () => selectOption(letter, btn);
+      btn.className = 'opt'; btn.textContent = opt; btn.dataset.letter = letter;
+      btn.onclick = () => pickOpt(letter, btn);
       grid.appendChild(btn);
     });
-
   } catch(e) {
-    console.error('API Error:', e);
-    document.getElementById('question-text').textContent = '⚠️ Error loading question. Check your API key and connection.';
-    document.getElementById('question-text').classList.remove('loading');
-    document.getElementById('options-grid').style.display = 'none';
+    document.getElementById('q-text').textContent = '⚠️ Error loading question. Check API key & internet, then tap Skip.';
+    document.getElementById('q-text').classList.remove('loading');
+    document.getElementById('opts-grid').innerHTML = '';
+    const nb = document.getElementById('next-btn'); nb.textContent='↺ Skip'; nb.classList.add('show');
+  }
+}
 
-    // Show a fallback manual answer box
-    document.getElementById('open-answer-wrap').style.display = 'none';
+function pickOpt(letter, btn) {
+  if (G.session.answered) return;
+  if (btn.disabled) return;
+  const isCorrect = letter === G.session.correctAnswer;
+  if (isCorrect) { doCorrect(btn); }
+  else { doWrong(btn); }
+}
 
-    // Show retry next button
+function doCorrect(btn) {
+  G.session.answered = true; G.session.correct++;
+  btn.classList.add('correct');
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+  document.getElementById('q-card').classList.add('bounce');
+  setTimeout(() => document.getElementById('q-card').classList.remove('bounce'), 400);
+  const fb = document.getElementById('fb-box');
+  fb.className = 'fb-box fb-correct show';
+  fb.innerHTML = `✅ <strong>Correct!</strong> ${G.session.explanation||''}`;
+  const nb = document.getElementById('next-btn');
+  nb.textContent = G.session.qIndex+1>=TOTAL_QS ? 'See Results 🏁' : 'Next Question →';
+  nb.classList.add('show');
+}
+
+function doWrong(btn) {
+  const att = G.session.attempt;
+  markDot(att, 'wrong');
+  btn.classList.add('wrong-ans');
+  btn.disabled = true;
+  document.getElementById('q-card').classList.add('shake');
+  setTimeout(() => document.getElementById('q-card').classList.remove('shake'), 450);
+  G.session.attempt++;
+
+  if (G.session.attempt < MAX_ATTEMPTS) {
+    // Still has one more attempt
+    const fb = document.getElementById('fb-box');
+    fb.className = 'fb-box fb-wrong show';
+    fb.innerHTML = `❌ <strong>Not quite.</strong> One more try!`;
+    document.getElementById('try-again-btn').className = 'try-again-btn show';
+  } else {
+    // Out of attempts — reveal
+    G.session.answered = true;
+    document.querySelectorAll('.opt').forEach(b => {
+      b.disabled = true;
+      if (b.dataset.letter === G.session.correctAnswer) b.classList.add('revealed-correct');
+    });
+    markDot(1, 'revealed');
+    const fb = document.getElementById('fb-box');
+    fb.className = 'fb-box fb-revealed show';
+    fb.innerHTML = `💡 <strong>Answer revealed.</strong> ${G.session.explanation||''}`;
+    document.getElementById('try-again-btn').className = 'try-again-btn';
     const nb = document.getElementById('next-btn');
-    nb.textContent = '↺ Try Again';
+    nb.textContent = G.session.qIndex+1>=TOTAL_QS ? 'See Results 🏁' : 'Next Question →';
     nb.classList.add('show');
   }
 }
 
-function selectOption(letter, btn) {
-  if (state.session.answered) return;
-  state.session.answered = true;
-
-  const correct = state.session.correctAnswer;
-  const isCorrect = letter === correct;
-
-  // Style all buttons
-  document.querySelectorAll('.option-btn').forEach(b => {
-    b.disabled = true;
-    if (b.dataset.letter === correct) {
-      b.classList.add('correct');
-    } else if (b.dataset.letter === letter && !isCorrect) {
-      b.classList.add('wrong');
-    }
-  });
-
-  if (isCorrect) state.session.correct++;
-  showFeedback(isCorrect);
+function tryAgain() {
+  document.getElementById('fb-box').className = 'fb-box';
+  document.getElementById('try-again-btn').className = 'try-again-btn';
+  // Re-enable non-disabled (non-wrong) options
+  document.querySelectorAll('.opt').forEach(b => { if (!b.disabled) b.classList.remove('wrong-ans'); });
 }
 
-function showFeedback(isCorrect) {
-  const fb = document.getElementById('feedback-box');
-  fb.className = `feedback-box show ${isCorrect ? 'correct-fb' : 'wrong-fb'}`;
-  fb.innerHTML = isCorrect
-    ? `✅ <strong>Correct!</strong> ${state.session.explanation || 'Great job!'}`
-    : `❌ <strong>Not quite.</strong> ${state.session.explanation || 'Review this concept and try again.'}`;
-
-  const nb = document.getElementById('next-btn');
-  const { current } = state.session;
-  nb.textContent = current + 1 >= QUESTIONS_PER_SESSION ? 'See Results 🏁' : 'Next Question →';
-  nb.classList.add('show');
-}
-
-function nextQuestion() {
-  state.session.current++;
-  document.getElementById('practice-progress').textContent =
-    `${state.session.current} / ${QUESTIONS_PER_SESSION}`;
-  document.getElementById('progress-bar').style.width =
-    `${(state.session.current / QUESTIONS_PER_SESSION) * 100}%`;
-
-  if (state.session.current >= QUESTIONS_PER_SESSION) {
-    showResults();
-  } else {
-    loadNextQuestion();
-  }
+function nextQ() {
+  G.session.qIndex++;
+  updateProg();
+  if (G.session.qIndex >= TOTAL_QS) { finishSession(); } else { loadQ(); }
 }
 
 function confirmBack() {
-  if (state.session.current > 0) {
-    if (confirm('Leave this session? Progress won\'t be saved.')) {
-      showScreen('dashboard');
-    }
-  } else {
-    showScreen('dashboard');
-  }
+  if (G.session.qIndex > 0) { if (confirm("Leave? Progress won't be saved.")) showScreen('dashboard'); }
+  else { showScreen('dashboard'); }
 }
 
-// ───────────────────────────────────────────────
-// RESULTS
-// ───────────────────────────────────────────────
-function showResults() {
-  const { correct, skill } = state.session;
-  const sid = state.currentStudent;
-  const s = state.students[sid];
-  const total = QUESTIONS_PER_SESSION;
-  const pct = Math.round((correct / total) * 100);
+// ── RESULTS ───────────────────────────────────────────────────────────────────
+function finishSession() {
+  const { correct, skill } = G.session;
+  const sid = G.cur; const s = G.students[sid];
+  const pct = Math.round((correct/TOTAL_QS)*100);
 
-  // Update mastery
-  if (!s.skills[skill.id]) s.skills[skill.id] = { mastery: 0, attempts: 0 };
-  const old = s.skills[skill.id].mastery;
-  // Weighted update: each session moves mastery up or down
-  const delta = pct >= 80 ? 15 : pct >= 60 ? 5 : -5;
-  s.skills[skill.id].mastery = Math.max(0, Math.min(100, old + delta));
-  s.skills[skill.id].attempts = (s.skills[skill.id].attempts || 0) + 1;
-  s.totalProblems = (s.totalProblems || 0) + total;
+  if (!s.skills[skill.id]) s.skills[skill.id] = {mastery:0,attempts:0};
+  const oldM = s.skills[skill.id].mastery;
+  const delta = pct>=90?20:pct>=70?10:pct>=50?3:-8;
+  s.skills[skill.id].mastery = Math.max(0, Math.min(100, oldM+delta));
+  s.skills[skill.id].attempts = (s.skills[skill.id].attempts||0)+1;
+  s.total = (s.total||0)+TOTAL_QS;
 
-  // Streak
   const today = new Date().toDateString();
-  if (s.lastPracticeDate !== today) {
-    const yesterday = new Date(Date.now() - 86400000).toDateString();
-    s.streak = s.lastPracticeDate === yesterday ? s.streak + 1 : 1;
-    s.lastPracticeDate = today;
+  if (s.lastDate !== today) {
+    const yesterday = new Date(Date.now()-86400000).toDateString();
+    s.streak = s.lastDate===yesterday ? s.streak+1 : 1;
+    s.lastDate = today;
   }
+  save(); refreshHome();
 
-  saveState();
-  updateHomeScreen();
+  const newM = s.skills[skill.id].mastery;
+  const icon = pct===100?'🏆':pct>=80?'⭐':pct>=60?'👍':'💪';
+  const msg = pct===100?"Perfect score! You nailed every one.":pct>=80?"Strong work! Almost mastered.":pct>=60?"Good effort — keep practicing!":"Keep going. Every session builds you up.";
 
-  // Render results
-  const icons = pct === 100 ? '🏆' : pct >= 80 ? '⭐' : pct >= 60 ? '👍' : '💪';
-  const msgs = pct === 100 ? "Perfect score! You're unstoppable!" :
-               pct >= 80 ? "Excellent work! Keep it up!" :
-               pct >= 60 ? "Good effort! A bit more practice will get you there." :
-               "Keep going — every practice makes you stronger!";
+  document.getElementById('res-icon').textContent = icon;
+  document.getElementById('res-score').textContent = `${correct}/${TOTAL_QS}`;
+  document.getElementById('res-msg').textContent = msg;
+  document.getElementById('mc-skill').textContent = `${skill.icon} ${skill.name}`;
+  document.getElementById('mc-fill').style.width = '0%';
+  document.getElementById('mc-pct').textContent = `${newM}% mastery`;
 
-  document.getElementById('result-icon').textContent = icons;
-  document.getElementById('result-score').textContent = `${correct}/${total}`;
-  document.getElementById('result-message').textContent = msgs;
-  document.getElementById('mu-skill-name').textContent = `${skill.icon} ${skill.name} mastery`;
-  document.getElementById('mu-bar-fill').style.width = '0%';
-  document.getElementById('mu-pct').textContent = `${s.skills[skill.id].mastery}%`;
+  const skills = getSkills(sid);
+  const idx = skills.findIndex(sk=>sk.id===skill.id);
+  const next = skills[idx+1];
+  const noteEl = document.getElementById('next-skill-note');
+  if (newM>=80 && oldM<80 && next) { noteEl.textContent=`🔓 "${next.name}" just unlocked!`; noteEl.classList.add('show'); }
+  else if (newM>=80 && !next) { noteEl.textContent=`🎓 All skills mastered! Full track complete.`; noteEl.classList.add('show'); }
+  else { noteEl.className='next-skill-note'; }
 
   showScreen('results');
-  setTimeout(() => {
-    document.getElementById('mu-bar-fill').style.width = `${s.skills[skill.id].mastery}%`;
-  }, 300);
+  setTimeout(()=>{ document.getElementById('mc-fill').style.width=`${newM}%`; }, 300);
 
-  if (s.skills[skill.id].mastery >= 80 && old < 80) {
-    showToast(`🎉 "${skill.name}" MASTERED!`);
-  } else if (pct === 100) {
-    showToast(`🔥 Perfect score! ${s.streak} day streak!`);
-  }
+  if (newM>=80 && oldM<80) showToast(`🎉 "${skill.name}" MASTERED!`);
+  else if (pct===100) showToast(`🔥 Perfect! ${s.streak}-day streak!`);
 }
 
-function practiceAgain() {
-  startSkillPractice(state.session.skill);
-}
-
-// ───────────────────────────────────────────────
-// UTILITIES
-// ───────────────────────────────────────────────
-function saveApiKey() {
-  const key = document.getElementById('modal-apikey').value.trim();
-  if (!key.startsWith('sk-')) { alert('Invalid API key'); return; }
-  state.apiKey = key;
-  saveState();
-  document.getElementById('apikey-modal').classList.remove('show');
-}
+function practiceAgain() { beginSession(G.session.skill); }
+function goDash() { showDash(G.cur); }
 
 function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3200);
 }
 
-// ───────────────────────────────────────────────
-// INIT
-// ───────────────────────────────────────────────
-loadState();
+load();
 </script>
 </body>
 </html>
