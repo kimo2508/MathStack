@@ -1,0 +1,160 @@
+{
+  "kailea": [
+    {
+      "id": "sub3",
+      "name": "3-Digit Subtraction",
+      "icon": "➖",
+      "desc": "e.g. 847 − 293, with borrowing",
+      "generator": { "type": "subtraction", "minTop": 100, "maxTop": 999, "minBot": 100, "maxBot": 999, "requireBorrow": true }
+    },
+    {
+      "id": "sub4",
+      "name": "4-Digit Subtraction",
+      "icon": "➖",
+      "desc": "e.g. 5,043 − 1,867",
+      "generator": { "type": "subtraction", "minTop": 1000, "maxTop": 9999, "minBot": 1000, "maxBot": 9999, "requireBorrow": true }
+    },
+    {
+      "id": "mult_facts",
+      "name": "Multiplication Facts",
+      "icon": "✖️",
+      "desc": "Times tables 1–12",
+      "generator": { "type": "multiplication", "minA": 2, "maxA": 12, "minB": 2, "maxB": 12 }
+    },
+    {
+      "id": "mult_2dig",
+      "name": "Multi-Digit Multiply",
+      "icon": "✖️",
+      "desc": "e.g. 34 × 27",
+      "generator": { "type": "multiplication", "minA": 10, "maxA": 99, "minB": 10, "maxB": 99 }
+    },
+    {
+      "id": "div_facts",
+      "name": "Division Facts",
+      "icon": "➗",
+      "desc": "Dividing up to 144 ÷ 12",
+      "generator": { "type": "division", "minDivisor": 2, "maxDivisor": 12, "maxQuotient": 12, "noRemainder": true }
+    },
+    {
+      "id": "div_long",
+      "name": "Long Division",
+      "icon": "➗",
+      "desc": "e.g. 378 ÷ 6, with remainders",
+      "generator": { "type": "division", "minDivisor": 3, "maxDivisor": 9, "minDividend": 100, "maxDividend": 999, "noRemainder": false }
+    },
+    {
+      "id": "frac_basic",
+      "name": "Fraction Basics",
+      "icon": "½",
+      "desc": "Simplifying & equivalent fractions",
+      "generator": { "type": "simplify_fraction" }
+    },
+    {
+      "id": "frac_add",
+      "name": "Adding Fractions",
+      "icon": "½",
+      "desc": "Like & unlike denominators",
+      "generator": { "type": "add_fractions" }
+    },
+    {
+      "id": "frac_mult",
+      "name": "Multiplying Fractions",
+      "icon": "½",
+      "desc": "Fractions × fractions",
+      "generator": { "type": "multiply_fractions" }
+    },
+    {
+      "id": "decimals",
+      "name": "Decimals",
+      "icon": ".0",
+      "desc": "Add, subtract, multiply decimals",
+      "generator": { "type": "decimals" }
+    },
+    {
+      "id": "percent",
+      "name": "Percents",
+      "icon": "%",
+      "desc": "Find % of a number",
+      "generator": { "type": "percent" }
+    },
+    {
+      "id": "integers",
+      "name": "Integers",
+      "icon": "±",
+      "desc": "Negative numbers & operations",
+      "generator": { "type": "integers" }
+    }
+  ],
+  "kaleb": [
+    {
+      "id": "sub_20",
+      "name": "Subtraction to 20",
+      "icon": "➖",
+      "desc": "e.g. 20 − 7, 18 − 9",
+      "generator": { "type": "subtraction", "minTop": 10, "maxTop": 20, "minBot": 1, "maxBot": 9, "requireBorrow": false }
+    },
+    {
+      "id": "sub_2dig",
+      "name": "2-Digit Subtraction",
+      "icon": "➖",
+      "desc": "e.g. 45 − 23",
+      "generator": { "type": "subtraction", "minTop": 20, "maxTop": 99, "minBot": 10, "maxBot": 50, "requireBorrow": false }
+    },
+    {
+      "id": "sub_borrow",
+      "name": "Subtraction w/ Borrowing",
+      "icon": "➖",
+      "desc": "e.g. 73 − 48",
+      "generator": { "type": "subtraction", "minTop": 30, "maxTop": 99, "minBot": 10, "maxBot": 70, "requireBorrow": true }
+    },
+    {
+      "id": "add_2dig",
+      "name": "Addition to 100",
+      "icon": "➕",
+      "desc": "e.g. 47 + 38",
+      "generator": { "type": "addition", "minA": 10, "maxA": 80, "minB": 10, "maxB": 80, "maxSum": 100 }
+    },
+    {
+      "id": "sub_3dig",
+      "name": "3-Digit Subtraction",
+      "icon": "➖",
+      "desc": "e.g. 342 − 178",
+      "generator": { "type": "subtraction", "minTop": 100, "maxTop": 999, "minBot": 100, "maxBot": 999, "requireBorrow": true }
+    },
+    {
+      "id": "mult_facts",
+      "name": "Multiplication Basics",
+      "icon": "✖️",
+      "desc": "Times tables 1–10",
+      "generator": { "type": "multiplication", "minA": 2, "maxA": 10, "minB": 2, "maxB": 10 }
+    },
+    {
+      "id": "mult_2dig",
+      "name": "Multiply by 2-Digits",
+      "icon": "✖️",
+      "desc": "e.g. 24 × 3",
+      "generator": { "type": "multiplication", "minA": 11, "maxA": 50, "minB": 2, "maxB": 9 }
+    },
+    {
+      "id": "div_facts",
+      "name": "Division Basics",
+      "icon": "➗",
+      "desc": "Dividing up to 100 ÷ 10",
+      "generator": { "type": "division", "minDivisor": 2, "maxDivisor": 10, "maxQuotient": 10, "noRemainder": true }
+    },
+    {
+      "id": "frac_intro",
+      "name": "Fraction Intro",
+      "icon": "½",
+      "desc": "Comparing simple fractions",
+      "generator": { "type": "compare_fractions" }
+    },
+    {
+      "id": "frac_add",
+      "name": "Adding Fractions",
+      "icon": "½",
+      "desc": "Same denominator",
+      "generator": { "type": "add_fractions_same_denom" }
+    }
+  ]
+}
